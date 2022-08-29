@@ -11,4 +11,7 @@ class AppColors {
 
   /// #E5E5E5
   static const background = Color(0xFFE5E5E5);
+
+  /// #A7ABC9 (167, 171, 201)
+  static const shadow = Color(0xFFE5E5E5);
 }
