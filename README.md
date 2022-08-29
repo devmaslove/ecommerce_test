@@ -1,16 +1,19 @@
 # ecommerce_test
 
-A new Flutter project.
+Верстка магазина на Flutter.
+
+Содержание:
+- Экран «Main»: выбор категории, фильтрация по двум параметарам
+- Экран  «Product Details»: карусель, инфо, добавление в корзину
+- Экран «My Cart»: корзина, изменение количества (0 - удаление)
+
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Если хотите сделать свой пет проект для резюме, но нет идей, макета и тз, ловите:)
 
-A few resources to get you started if this is your first Flutter project:
+Макет:
+https://www.figma.com/file/KqZcU5m3GMxAHwgFkvCONz/ECOMMERCE?node-id=2%3A845
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Тз:
+https://docs.google.com/document/d/1VedkRcsN6yukGO2uWES4RuIM8KMtESZ8p7zD7nGySMs/edit?usp=sharing
