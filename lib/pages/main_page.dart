@@ -44,6 +44,87 @@ class _MainPageState extends State<MainPage> {
               setState(() => selectedCategory = category);
             },
           ),
+          const Padding(
+            padding: EdgeInsets.only(
+              left: 15,
+              right: 21,
+              top: 8,
+              bottom: 11,
+            ),
+            child: HotSaleWidget(
+              title: "Xiaomi Mi 11 ultra",
+              isNew: true,
+              subtitle: "Súper. Mega. Rápido.",
+              picture:
+                  "https://static.digit.in/default/942998b8b4d3554a6259aeb1a0124384dbe0d4d5.jpeg",
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class HotSaleWidget extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final String picture;
+  final bool isNew;
+
+  const HotSaleWidget({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    required this.picture,
+    required this.isNew,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 182,
+      clipBehavior: Clip.antiAlias,
+      decoration: BoxDecoration(
+        color: AppColors.backgroundDark,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Stack(
+        children: [
+          Positioned(
+            left: 98,
+            top: -10,
+            height: 221,
+            width: 384,
+            child: Image.network(
+              picture,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Positioned(
+            left: 25,
+            bottom: 26,
+            child: ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                primary: Colors.white,
+                elevation: 0,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 27,
+                  vertical: 5,
+                ),
+              ),
+              child: Text(
+                'Buy now!',
+                style: const AppTextStyle().copyWith(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

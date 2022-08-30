@@ -9,6 +9,9 @@ class AppColors {
   /// #010035
   static const dark = Color(0xFF010035);
 
+  /// #101010
+  static const backgroundDark = Color(0xFF101010);
+
   /// #E5E5E5
   static const background = Color(0xFFE5E5E5);
 
