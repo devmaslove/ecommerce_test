@@ -44,19 +44,38 @@ class _MainPageState extends State<MainPage> {
               setState(() => selectedCategory = category);
             },
           ),
-          const Padding(
-            padding: EdgeInsets.only(
+          Container(
+            padding: const EdgeInsets.only(
               left: 15,
               right: 21,
               top: 8,
               bottom: 11,
             ),
-            child: HotSaleWidget(
-              title: "Xiaomi Mi 11 ultra",
-              isNew: true,
-              subtitle: "Súper. Mega. Rápido.",
-              picture:
-                  "https://static.digit.in/default/942998b8b4d3554a6259aeb1a0124384dbe0d4d5.jpeg",
+            height: 182,
+            child: PageView(
+              children: const [
+                HotSaleWidget(
+                  title: "Iphone 12",
+                  isNew: true,
+                  subtitle: "Súper. Mega. Rápido.",
+                  picture:
+                      "https://img.ibxk.com.br/2020/09/23/23104013057475.jpg?w=1120&h=420&mode=crop&scale=both",
+                ),
+                HotSaleWidget(
+                  title: "Samsung Galaxy A71",
+                  isNew: false,
+                  subtitle: "Súper. Mega. Rápido.",
+                  picture:
+                      "https://cdn-2.tstatic.net/kupang/foto/bank/images/pre-order-samsung-galaxy-a71-laris-manis-inilah-rekomendasi-ponsel-harga-rp-6-jutaan.jpg",
+                ),
+                HotSaleWidget(
+                  title: "Xiaomi Mi 11 ultra",
+                  isNew: false,
+                  subtitle: "Súper. Mega. Rápido.",
+                  picture:
+                      "https://static.digit.in/default/942998b8b4d3554a6259aeb1a0124384dbe0d4d5.jpeg",
+                ),
+              ],
             ),
           ),
         ],
@@ -119,12 +138,66 @@ class HotSaleWidget extends StatelessWidget {
               child: Text(
                 'Buy now!',
                 style: const AppTextStyle().copyWith(
+                  fontFamily: 'SF Pro Display',
                   fontSize: 11,
+                  height: 13 / 11,
                   fontWeight: FontWeight.w700,
                 ),
               ),
             ),
           ),
+          Positioned(
+            left: 25,
+            bottom: 75,
+            child: Text(
+              subtitle,
+              style: const AppTextStyle().copyWith(
+                fontFamily: 'SF Pro Display',
+                fontSize: 11,
+                height: 13 / 11,
+                fontWeight: FontWeight.w400,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          Positioned(
+            left: 25,
+            bottom: 93,
+            child: Text(
+              title,
+              style: const AppTextStyle().copyWith(
+                fontFamily: 'SF Pro Display',
+                fontSize: 25,
+                height: 30 / 25,
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          if (isNew)
+            Positioned(
+              left: 25,
+              top: 14,
+              child: Container(
+                width: 27,
+                height: 27,
+                alignment: Alignment.center,
+                decoration: const BoxDecoration(
+                  color: AppColors.accent,
+                  shape: BoxShape.circle,
+                ),
+                child: Text(
+                  'New',
+                  style: const AppTextStyle().copyWith(
+                    fontFamily: 'SF Pro Display',
+                    fontSize: 10,
+                    height: 12 / 10,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
     );
