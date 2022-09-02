@@ -3,6 +3,7 @@ import 'package:ecommerce_test/resources/app_images.dart';
 import 'package:ecommerce_test/resources/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -44,42 +45,234 @@ class _MainPageState extends State<MainPage> {
               setState(() => selectedCategory = category);
             },
           ),
-          Container(
-            padding: const EdgeInsets.only(
-              left: 15,
-              right: 21,
-              top: 8,
-              bottom: 11,
+          const ListHotSalesWidget(
+            children: [
+              HotSaleWidget(
+                title: "Iphone 12",
+                isNew: true,
+                subtitle: "Súper. Mega. Rápido.",
+                picture:
+                    "https://img.ibxk.com.br/2020/09/23/23104013057475.jpg?w=1120&h=420&mode=crop&scale=both",
+              ),
+              HotSaleWidget(
+                title: "Samsung Galaxy A71",
+                isNew: false,
+                subtitle: "Súper. Mega. Rápido.",
+                picture:
+                    "https://cdn-2.tstatic.net/kupang/foto/bank/images/pre-order-samsung-galaxy-a71-laris-manis-inilah-rekomendasi-ponsel-harga-rp-6-jutaan.jpg",
+              ),
+              HotSaleWidget(
+                title: "Xiaomi Mi 11 ultra",
+                isNew: false,
+                subtitle: "Súper. Mega. Rápido.",
+                picture:
+                    "https://static.digit.in/default/942998b8b4d3554a6259aeb1a0124384dbe0d4d5.jpeg",
+              ),
+            ],
+          ),
+          ListTitleWidget(
+            title: 'Best Seller',
+            buttonText: 'see more',
+            onPressed: () {},
+          ),
+          const ListBestSellersWidget(
+            children: [
+              BestSellerWidget(
+                picture:
+                    'https://shop.gadgetufa.ru/images/upload/52534-smartfon-samsung-galaxy-s20-ultra-12-128-chernyj_1024.jpg',
+                isFavorite: false,
+                title: 'Samsung Galaxy s20 Ultra',
+                discountPrice: 1047,
+                price: 1500,
+              ),
+              BestSellerWidget(
+                picture:
+                    'https://mi92.ru/wp-content/uploads/2020/03/smartfon-xiaomi-mi-10-pro-12-256gb-global-version-starry-blue-sinij-1.jpg',
+                isFavorite: true,
+                title: 'Xiaomi Mi 10 Pro',
+                discountPrice: 300,
+                price: 400,
+              ),
+              BestSellerWidget(
+                picture:
+                    'https://opt-1739925.ssl.1c-bitrix-cdn.ru/upload/iblock/c01/c014d088c28d45b606ed8c58e5817172.jpg?160405904823488',
+                isFavorite: true,
+                title: 'Samsung Note 20 Ultra',
+                discountPrice: 1047,
+                price: 1500,
+              ),
+              BestSellerWidget(
+                picture: 'https://www.benchmark.rs/assets/img/news/edge1.jpg',
+                isFavorite: false,
+                title: 'Motorola One Edge',
+                discountPrice: 300,
+                price: 400,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class BestSellerWidget extends StatelessWidget {
+  final String picture;
+  final bool isFavorite;
+  final String title;
+  final int price;
+  final int discountPrice;
+
+  const BestSellerWidget({
+    super.key,
+    required this.picture,
+    required this.isFavorite,
+    required this.title,
+    required this.price,
+    required this.discountPrice,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final oCcy = NumberFormat("\$#,##0", "en_US");
+    return Card(
+      color: Colors.white,
+      shadowColor: AppColors.shadowCard.withOpacity(0.1),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          Positioned(
+            top: -1,
+            height: 168,
+            width: 187,
+            child: Image.network(
+              picture,
+              fit: BoxFit.fill,
             ),
-            height: 182,
-            child: PageView(
-              children: const [
-                HotSaleWidget(
-                  title: "Iphone 12",
-                  isNew: true,
-                  subtitle: "Súper. Mega. Rápido.",
-                  picture:
-                      "https://img.ibxk.com.br/2020/09/23/23104013057475.jpg?w=1120&h=420&mode=crop&scale=both",
+          ),
+          Positioned(
+            right: 15,
+            top: 11,
+            height: 25,
+            width: 25,
+            child: Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.15),
+                    blurRadius: 20,
+                  ),
+                ],
+              ),
+              child: SvgPicture.asset(
+                isFavorite ? AppImages.favOn : AppImages.favOff,
+                width: 11,
+                height: 10,
+                color: AppColors.accent,
+              ),
+            ),
+          ),
+          Positioned(
+            top: 174,
+            width: 140,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      oCcy.format(discountPrice),
+                      style: const AppTextStyle().copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(width: 7),
+                    Text(
+                      oCcy.format(price),
+                      style: const AppTextStyle().copyWith(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.grey,
+                        decoration: TextDecoration.lineThrough,
+                      ),
+                    ),
+                  ],
                 ),
-                HotSaleWidget(
-                  title: "Samsung Galaxy A71",
-                  isNew: false,
-                  subtitle: "Súper. Mega. Rápido.",
-                  picture:
-                      "https://cdn-2.tstatic.net/kupang/foto/bank/images/pre-order-samsung-galaxy-a71-laris-manis-inilah-rekomendasi-ponsel-harga-rp-6-jutaan.jpg",
-                ),
-                HotSaleWidget(
-                  title: "Xiaomi Mi 11 ultra",
-                  isNew: false,
-                  subtitle: "Súper. Mega. Rápido.",
-                  picture:
-                      "https://static.digit.in/default/942998b8b4d3554a6259aeb1a0124384dbe0d4d5.jpeg",
+                const SizedBox(height: 7),
+                Text(
+                  title,
+                  style: const AppTextStyle().copyWith(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ],
             ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class ListBestSellersWidget extends StatelessWidget {
+  final List<Widget> children;
+
+  const ListBestSellersWidget({
+    super.key,
+    required this.children,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      shrinkWrap: true,
+      padding: const EdgeInsets.only(
+        left: 15,
+        right: 21,
+        top: 16,
+        bottom: 22,
+      ),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 12,
+        crossAxisSpacing: 14,
+        mainAxisExtent: 227,
+      ),
+      itemCount: children.length,
+      itemBuilder: (context, index) => children[index],
+    );
+  }
+}
+
+class ListHotSalesWidget extends StatelessWidget {
+  final List<Widget> children;
+
+  const ListHotSalesWidget({
+    super.key,
+    required this.children,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(
+        left: 15,
+        right: 21,
+        top: 8,
+        bottom: 11,
+      ),
+      height: 182,
+      child: PageView(children: children),
     );
   }
 }

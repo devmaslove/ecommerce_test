@@ -9,6 +9,9 @@ class AppColors {
   /// #010035
   static const dark = Color(0xFF010035);
 
+  /// #CCCCCC
+  static const grey = Color(0xFFCCCCCC);
+
   /// #101010
   static const backgroundDark = Color(0xFF101010);
 
@@ -17,4 +20,7 @@ class AppColors {
 
   /// #A7ABC9 (167, 171, 201)
   static const shadow = Color(0xFFE5E5E5);
+
+  // #AAB6D3 (170, 182, 211)
+  static const shadowCard = Color(0xFFAAB6D3);
 }
