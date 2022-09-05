@@ -8,4 +8,5 @@ class AppImages {
   static const books = "assets/svg/books.svg";
   static const favOn = "assets/svg/fav-on.svg";
   static const favOff = "assets/svg/fav-off.svg";
+  static const cross = "assets/svg/cross.svg";
 }

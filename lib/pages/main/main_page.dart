@@ -1,9 +1,10 @@
+import 'package:ecommerce_test/pages/main/filter_options_bottom_sheet.dart';
+import 'package:ecommerce_test/pages/main/widgets/best_seller_widget.dart';
+import 'package:ecommerce_test/pages/main/widgets/category_widget.dart';
+import 'package:ecommerce_test/pages/main/widgets/hot_sale_widget.dart';
 import 'package:ecommerce_test/resources/app_colors.dart';
 import 'package:ecommerce_test/resources/app_images.dart';
 import 'package:ecommerce_test/resources/app_text_style.dart';
-import 'package:ecommerce_test/widgets/best_seller_widget.dart';
-import 'package:ecommerce_test/widgets/category_widget.dart';
-import 'package:ecommerce_test/widgets/hot_sale_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -29,7 +30,19 @@ class _MainPageState extends State<MainPage> {
               height: 13,
             ),
             tooltip: 'Open filter',
-            onPressed: () {},
+            onPressed: () {
+              showModalBottomSheet(
+                  context: context,
+                  backgroundColor: Colors.white,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(30),
+                    ),
+                  ),
+                  builder: (context) {
+                    return const FilterOptionsBottomSheet();
+                  });
+            },
           ),
           const SizedBox(width: 17),
         ],
