@@ -1,3 +1,4 @@
+import 'package:ecommerce_test/pages/main/widgets/select_dropdown_widget.dart';
 import 'package:ecommerce_test/resources/app_colors.dart';
 import 'package:ecommerce_test/resources/app_images.dart';
 import 'package:ecommerce_test/resources/app_text_style.dart';
@@ -77,7 +78,9 @@ class FilterOptionsBottomSheet extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10, width: double.infinity),
-              const Text('Select'),
+              const SelectDropdownWidget(
+                values: ['Samsung', 'Xiaomi', 'Motorola', 'Apple'],
+              ),
               const SizedBox(height: 14),
               Text(
                 'Price',
@@ -88,7 +91,14 @@ class FilterOptionsBottomSheet extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              const Text('Select'),
+              const SelectDropdownWidget(
+                values: [
+                  '\$300 - \$500',
+                  '\$500 - \$1000',
+                  '\$1000 - \$5000',
+                  '\$5000 - \$10000'
+                ],
+              ),
               const SizedBox(height: 14),
               Text(
                 'Size',
@@ -99,7 +109,9 @@ class FilterOptionsBottomSheet extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              const Text('Select'),
+              const SelectDropdownWidget(
+                values: ['4.5 to 5.5 inches'],
+              ),
             ],
           ),
         ),
