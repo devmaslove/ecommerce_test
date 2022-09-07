@@ -34,6 +34,7 @@ class _MainPageState extends State<MainPage> {
               showModalBottomSheet(
                   context: context,
                   backgroundColor: Colors.white,
+                  isScrollControlled: true,
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(30),
