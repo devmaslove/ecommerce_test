@@ -10,4 +10,6 @@ class AppImages {
   static const favOff = "assets/svg/fav-off.svg";
   static const cross = "assets/svg/cross.svg";
   static const dropDown = "assets/svg/drop-down.svg";
+  static const back = "assets/svg/back.svg";
+  static const cart = "assets/svg/cart.svg";
 }

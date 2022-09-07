@@ -7,6 +7,7 @@ class HotSaleWidget extends StatelessWidget {
   final String subtitle;
   final String picture;
   final bool isNew;
+  final VoidCallback onBuy;
 
   const HotSaleWidget({
     super.key,
@@ -14,6 +15,7 @@ class HotSaleWidget extends StatelessWidget {
     required this.subtitle,
     required this.picture,
     required this.isNew,
+    required this.onBuy,
   });
 
   @override
@@ -41,7 +43,7 @@ class HotSaleWidget extends StatelessWidget {
             left: 25,
             bottom: 26,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: onBuy,
               style: ElevatedButton.styleFrom(
                 primary: Colors.white,
                 elevation: 0,

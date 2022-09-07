@@ -11,6 +11,7 @@ class BestSellerWidget extends StatelessWidget {
   final String title;
   final int price;
   final int discountPrice;
+  final VoidCallback onTap;
 
   const BestSellerWidget({
     super.key,
@@ -19,6 +20,7 @@ class BestSellerWidget extends StatelessWidget {
     required this.title,
     required this.price,
     required this.discountPrice,
+    required this.onTap,
   });
 
   @override
@@ -105,6 +107,14 @@ class BestSellerWidget extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+          Positioned.fill(
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: onTap,
+              ),
             ),
           ),
         ],

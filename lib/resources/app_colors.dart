@@ -21,6 +21,9 @@ class AppColors {
   /// #A7ABC9 (167, 171, 201)
   static const shadow = Color(0xFFE5E5E5);
 
-  // #AAB6D3 (170, 182, 211)
+  /// #AAB6D3 (170, 182, 211)
   static const shadowCard = Color(0xFFAAB6D3);
+
+  /// #4C5F8F (76, 95, 143)
+  static const shadowDetails = Color(0xFF4C5F8F);
 }

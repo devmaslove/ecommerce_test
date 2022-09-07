@@ -1,3 +1,4 @@
+import 'package:ecommerce_test/pages/details/details_page.dart';
 import 'package:ecommerce_test/pages/main/filter_options_bottom_sheet.dart';
 import 'package:ecommerce_test/pages/main/widgets/best_seller_widget.dart';
 import 'package:ecommerce_test/pages/main/widgets/category_widget.dart';
@@ -61,10 +62,17 @@ class _MainPageState extends State<MainPage> {
               setState(() => selectedCategory = category);
             },
           ),
-          const ListHotSales(
+          ListHotSales(
             children: [
               HotSaleWidget(
                 title: "Iphone 12",
+                onBuy: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => const DetailsPage(),
+                    ),
+                  );
+                },
                 isNew: true,
                 subtitle: "Súper. Mega. Rápido.",
                 picture:
@@ -72,6 +80,13 @@ class _MainPageState extends State<MainPage> {
               ),
               HotSaleWidget(
                 title: "Samsung Galaxy A71",
+                onBuy: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => const DetailsPage(),
+                    ),
+                  );
+                },
                 isNew: false,
                 subtitle: "Súper. Mega. Rápido.",
                 picture:
@@ -79,6 +94,13 @@ class _MainPageState extends State<MainPage> {
               ),
               HotSaleWidget(
                 title: "Xiaomi Mi 11 ultra",
+                onBuy: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => const DetailsPage(),
+                    ),
+                  );
+                },
                 isNew: false,
                 subtitle: "Súper. Mega. Rápido.",
                 picture:
@@ -91,7 +113,7 @@ class _MainPageState extends State<MainPage> {
             buttonText: 'see more',
             onPressed: () {},
           ),
-          const ListBestSellers(
+          ListBestSellers(
             children: [
               BestSellerWidget(
                 picture:
@@ -100,6 +122,13 @@ class _MainPageState extends State<MainPage> {
                 title: 'Samsung Galaxy s20 Ultra',
                 discountPrice: 1047,
                 price: 1500,
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => const DetailsPage(),
+                    ),
+                  );
+                },
               ),
               BestSellerWidget(
                 picture:
@@ -108,6 +137,13 @@ class _MainPageState extends State<MainPage> {
                 title: 'Xiaomi Mi 10 Pro',
                 discountPrice: 300,
                 price: 400,
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => const DetailsPage(),
+                    ),
+                  );
+                },
               ),
               BestSellerWidget(
                 picture:
@@ -116,6 +152,13 @@ class _MainPageState extends State<MainPage> {
                 title: 'Samsung Note 20 Ultra',
                 discountPrice: 1047,
                 price: 1500,
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => const DetailsPage(),
+                    ),
+                  );
+                },
               ),
               BestSellerWidget(
                 picture: 'https://www.benchmark.rs/assets/img/news/edge1.jpg',
@@ -123,6 +166,13 @@ class _MainPageState extends State<MainPage> {
                 title: 'Motorola One Edge',
                 discountPrice: 300,
                 price: 400,
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => const DetailsPage(),
+                    ),
+                  );
+                },
               ),
             ],
           ),
@@ -210,7 +260,7 @@ class ListCategories extends StatelessWidget {
               title: 'Phones',
               selected: selectedCategory == 'Phones',
               imageAssetName: AppImages.phones,
-              imageWidth: 18.33,
+              imageWidth: 19,
               imageHeight: 30,
               onPressed: () => onSelectCategory('Phones'),
             ),
@@ -235,7 +285,7 @@ class ListCategories extends StatelessWidget {
               selected: selectedCategory == 'Books',
               imageAssetName: AppImages.books,
               imageWidth: 21,
-              imageHeight: 28.06,
+              imageHeight: 29,
               onPressed: () => onSelectCategory('Books'),
             ),
             CategoryWidget(
