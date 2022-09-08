@@ -26,4 +26,7 @@ class AppColors {
 
   /// #4C5F8F (76, 95, 143)
   static const shadowDetails = Color(0xFF4C5F8F);
+
+  /// #FFB800
+  static const star = Color(0xFFFFB800);
 }

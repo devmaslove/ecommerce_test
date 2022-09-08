@@ -3,6 +3,7 @@ import 'package:ecommerce_test/resources/app_colors.dart';
 import 'package:ecommerce_test/resources/app_text_style.dart';
 import 'package:ecommerce_test/widgets/color_button_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../resources/app_images.dart';
 
@@ -44,6 +45,7 @@ class _DetailsPageState extends State<DetailsPage> {
               onFavorite: () => setState(() => isFavorite = !isFavorite),
               title: 'Galaxy Note 20 Ultra',
               isFavorite: isFavorite,
+              rating: 4.5,
             ),
           ),
         ],
@@ -55,6 +57,7 @@ class _DetailsPageState extends State<DetailsPage> {
 class BottomDetailsWidget extends StatelessWidget {
   final String title;
   final bool isFavorite;
+  final double rating;
   final VoidCallback onAddToCart;
   final VoidCallback onFavorite;
 
@@ -64,6 +67,7 @@ class BottomDetailsWidget extends StatelessWidget {
     required this.onFavorite,
     required this.title,
     required this.isFavorite,
+    required this.rating,
   });
 
   @override
@@ -88,15 +92,33 @@ class BottomDetailsWidget extends StatelessWidget {
         children: [
           const SizedBox(height: 28),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(width: 38),
               Expanded(
-                child: Text(
-                  title,
-                  style: const AppTextStyle().copyWith(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w500,
-                  ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const AppTextStyle().copyWith(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(height: 7),
+                    RatingBarIndicator(
+                      rating: rating,
+                      itemBuilder: (context, index) => const Icon(
+                        Icons.star,
+                        color: AppColors.star,
+                      ),
+                      itemCount: 5,
+                      itemSize: 18,
+                      itemPadding: const EdgeInsets.only(right: 9),
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(width: 16),
