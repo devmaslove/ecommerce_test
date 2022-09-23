@@ -1,11 +1,11 @@
+import 'package:ecommerce_test/pages/details/widgets/details_carousel_widget.dart';
 import 'package:ecommerce_test/pages/details/widgets/details_title_widget.dart';
 import 'package:ecommerce_test/resources/app_colors.dart';
+import 'package:ecommerce_test/resources/app_images.dart';
 import 'package:ecommerce_test/resources/app_text_style.dart';
 import 'package:ecommerce_test/widgets/color_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
-import '../../resources/app_images.dart';
 
 class DetailsPage extends StatefulWidget {
   const DetailsPage({Key? key}) : super(key: key);
@@ -36,7 +36,12 @@ class _DetailsPageState extends State<DetailsPage> {
           ),
           const SizedBox(height: 30),
           const Expanded(
-            child: Center(child: Text('Images')),
+            child: DetailsCarouselWidget(
+              imagesLinks: [
+                "https://avatars.mds.yandex.net/get-mpic/5235334/img_id5575010630545284324.png/orig",
+                "https://www.manualspdf.ru/thumbs/products/l/1260237-samsung-galaxy-note-20-ultra.jpg",
+              ],
+            ),
           ),
           const SizedBox(height: 7),
           Expanded(
