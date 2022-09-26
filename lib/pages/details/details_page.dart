@@ -1,3 +1,4 @@
+import 'package:ecommerce_test/pages/details/bloc/details_bloc.dart';
 import 'package:ecommerce_test/pages/details/widgets/details_carousel_widget.dart';
 import 'package:ecommerce_test/pages/details/widgets/details_title_widget.dart';
 import 'package:ecommerce_test/resources/app_colors.dart';
@@ -5,56 +6,78 @@ import 'package:ecommerce_test/resources/app_images.dart';
 import 'package:ecommerce_test/resources/app_text_style.dart';
 import 'package:ecommerce_test/widgets/color_button_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-class DetailsPage extends StatefulWidget {
+class DetailsPage extends StatelessWidget {
   const DetailsPage({Key? key}) : super(key: key);
 
   @override
-  State<DetailsPage> createState() => _DetailsPageState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => DetailsBloc()..add(const DetailsLoadEvent()),
+      child: const Scaffold(
+        body: DetailsContent(),
+      ),
+    );
+  }
 }
 
-enum ProductColors { brown, black }
-
-enum ProductCapacity { gb128, gb256 }
-
-class _DetailsPageState extends State<DetailsPage> {
-  bool isFavorite = false;
-  String selectedTab = 'Shop';
-  ProductColors selectedColor = ProductColors.brown;
-  ProductCapacity selectedCapacity = ProductCapacity.gb128;
+class DetailsContent extends StatelessWidget {
+  const DetailsContent({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          const SizedBox(height: 30),
-          DetailsTitleWidget(
-            onBack: () => Navigator.of(context).pop(),
-            onCart: () => Navigator.of(context).pop(),
-          ),
-          const SizedBox(height: 30),
-          const Expanded(
-            child: DetailsCarouselWidget(
-              imagesLinks: [
-                "https://avatars.mds.yandex.net/get-mpic/5235334/img_id5575010630545284324.png/orig",
-                "https://www.manualspdf.ru/thumbs/products/l/1260237-samsung-galaxy-note-20-ultra.jpg",
-              ],
-            ),
-          ),
-          const SizedBox(height: 7),
-          Expanded(
-            child: BottomDetailsWidget(
-              onAddToCart: () {},
-              onFavorite: () => setState(() => isFavorite = !isFavorite),
-              title: 'Galaxy Note 20 Ultra',
-              isFavorite: isFavorite,
-              rating: 4.5,
-            ),
-          ),
-        ],
-      ),
+    return BlocBuilder<DetailsBloc, DetailsState>(
+      builder: (context, state) {
+        if (state is DetailsLoading) {
+          return Column(
+            children: [
+              const SizedBox(height: 30),
+              DetailsTitleWidget(
+                onBack: () => Navigator.of(context).pop(),
+                onCart: () => Navigator.of(context).pop(),
+              ),
+              const SizedBox(height: 30),
+              const Expanded(
+                child: Center(child: CircularProgressIndicator()),
+              ),
+            ],
+          );
+        }
+        if (state is DetailsLoaded) {
+          return Column(
+            children: [
+              const SizedBox(height: 30),
+              DetailsTitleWidget(
+                onBack: () => Navigator.of(context).pop(),
+                onCart: () => Navigator.of(context).pop(),
+              ),
+              const SizedBox(height: 30),
+              Expanded(
+                child: DetailsCarouselWidget(
+                  imagesLinks: state.images,
+                ),
+              ),
+              const SizedBox(height: 7),
+              Expanded(
+                child: BottomDetailsWidget(
+                  onAddToCart: () {},
+                  onFavorite: () => context
+                      .read<DetailsBloc>()
+                      .add(const DetailsToggleFavoriteEvent()),
+                  title: state.title,
+                  isFavorite: state.isFavorites,
+                  rating: state.rating,
+                ),
+              ),
+            ],
+          );
+        }
+        return const SizedBox.shrink();
+      },
     );
   }
 }
