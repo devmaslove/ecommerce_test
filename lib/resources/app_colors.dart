@@ -18,6 +18,9 @@ class AppColors {
   /// #E5E5E5
   static const background = Color(0xFFE5E5E5);
 
+  /// #B7B7B7
+  static const greyDetails = Color(0xFFB7B7B7);
+
   /// #A7ABC9 (167, 171, 201)
   static const shadow = Color(0xFFE5E5E5);
 

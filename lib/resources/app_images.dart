@@ -12,4 +12,8 @@ class AppImages {
   static const dropDown = "assets/svg/drop-down.svg";
   static const back = "assets/svg/back.svg";
   static const cart = "assets/svg/cart.svg";
+  static const cpu = "assets/svg/cpu.svg";
+  static const sd = "assets/svg/sd.svg";
+  static const ssd = "assets/svg/ssd.svg";
+  static const camera = "assets/svg/camera.svg";
 }

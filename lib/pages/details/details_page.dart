@@ -1,5 +1,6 @@
 import 'package:ecommerce_test/pages/details/bloc/details_bloc.dart';
 import 'package:ecommerce_test/pages/details/widgets/details_carousel_widget.dart';
+import 'package:ecommerce_test/pages/details/widgets/details_info_widget.dart';
 import 'package:ecommerce_test/pages/details/widgets/details_tabs_widget.dart';
 import 'package:ecommerce_test/pages/details/widgets/details_title_widget.dart';
 import 'package:ecommerce_test/resources/app_colors.dart';
@@ -71,6 +72,10 @@ class DetailsContent extends StatelessWidget {
                 title: state.title,
                 isFavorite: state.isFavorites,
                 rating: state.rating,
+                cpu: state.cpu,
+                camera: state.camera,
+                sd: state.sd,
+                ssd: state.ssd,
               ),
             ],
           );
@@ -83,6 +88,10 @@ class DetailsContent extends StatelessWidget {
 
 class BottomDetailsWidget extends StatelessWidget {
   final String title;
+  final String cpu;
+  final String camera;
+  final String ssd;
+  final String sd;
   final bool isFavorite;
   final double rating;
   final VoidCallback onAddToCart;
@@ -95,6 +104,10 @@ class BottomDetailsWidget extends StatelessWidget {
     required this.title,
     required this.isFavorite,
     required this.rating,
+    required this.cpu,
+    required this.camera,
+    required this.ssd,
+    required this.sd,
   });
 
   @override
@@ -163,6 +176,45 @@ class BottomDetailsWidget extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 27),
             child: DetailsTabsWidget(),
+          ),
+          const SizedBox(height: 32),
+          Row(
+            children: [
+              const SizedBox(width: 30),
+              Expanded(
+                child: DetailsInfoWidget(
+                  text: cpu,
+                  imageWidth: 28,
+                  imageHeight: 28,
+                  imageAssetName: AppImages.cpu,
+                ),
+              ),
+              Expanded(
+                child: DetailsInfoWidget(
+                  text: camera,
+                  imageWidth: 28,
+                  imageHeight: 22,
+                  imageAssetName: AppImages.camera,
+                ),
+              ),
+              Expanded(
+                child: DetailsInfoWidget(
+                  text: ssd,
+                  imageWidth: 28,
+                  imageHeight: 21,
+                  imageAssetName: AppImages.ssd,
+                ),
+              ),
+              Expanded(
+                child: DetailsInfoWidget(
+                  text: sd,
+                  imageWidth: 19,
+                  imageHeight: 22,
+                  imageAssetName: AppImages.sd,
+                ),
+              ),
+              const SizedBox(width: 30),
+            ],
           ),
           const SizedBox(height: 36),
         ],
