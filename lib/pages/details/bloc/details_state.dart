@@ -28,7 +28,6 @@ class DetailsLoaded extends DetailsState {
   final String title;
   final int selectedColor;
   final int selectedCapacity;
-  final int selectedTab;
 
   const DetailsLoaded({
     required this.cpu,
@@ -44,7 +43,6 @@ class DetailsLoaded extends DetailsState {
     required this.title,
     required this.selectedColor,
     required this.selectedCapacity,
-    required this.selectedTab,
   });
 
   @override
@@ -62,6 +60,5 @@ class DetailsLoaded extends DetailsState {
         title,
         selectedColor,
         selectedCapacity,
-        selectedTab
       ];
 }

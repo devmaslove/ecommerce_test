@@ -1,5 +1,6 @@
 import 'package:ecommerce_test/pages/details/bloc/details_bloc.dart';
 import 'package:ecommerce_test/pages/details/widgets/details_carousel_widget.dart';
+import 'package:ecommerce_test/pages/details/widgets/details_tabs_widget.dart';
 import 'package:ecommerce_test/pages/details/widgets/details_title_widget.dart';
 import 'package:ecommerce_test/resources/app_colors.dart';
 import 'package:ecommerce_test/resources/app_images.dart';
@@ -62,16 +63,14 @@ class DetailsContent extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 7),
-              Expanded(
-                child: BottomDetailsWidget(
-                  onAddToCart: () {},
-                  onFavorite: () => context
-                      .read<DetailsBloc>()
-                      .add(const DetailsToggleFavoriteEvent()),
-                  title: state.title,
-                  isFavorite: state.isFavorites,
-                  rating: state.rating,
-                ),
+              BottomDetailsWidget(
+                onAddToCart: () {},
+                onFavorite: () => context
+                    .read<DetailsBloc>()
+                    .add(const DetailsToggleFavoriteEvent()),
+                title: state.title,
+                isFavorite: state.isFavorites,
+                rating: state.rating,
               ),
             ],
           );
@@ -159,6 +158,11 @@ class BottomDetailsWidget extends StatelessWidget {
               ),
               const SizedBox(width: 38),
             ],
+          ),
+          const SizedBox(height: 24),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 27),
+            child: DetailsTabsWidget(),
           ),
           const SizedBox(height: 36),
         ],
