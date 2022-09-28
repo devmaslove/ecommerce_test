@@ -17,3 +17,12 @@ class DetailsToggleFavoriteEvent extends DetailsEvent {
   @override
   List<Object> get props => [];
 }
+
+class DetailsColorSelectEvent extends DetailsEvent {
+  final int selectedColor;
+
+  const DetailsColorSelectEvent(this.selectedColor);
+
+  @override
+  List<Object> get props => [selectedColor];
+}

@@ -1,4 +1,5 @@
 import 'package:ecommerce_test/pages/details/bloc/details_bloc.dart';
+import 'package:ecommerce_test/pages/details/widgets/colors_selector_widget.dart';
 import 'package:ecommerce_test/pages/details/widgets/details_carousel_widget.dart';
 import 'package:ecommerce_test/pages/details/widgets/details_info_widget.dart';
 import 'package:ecommerce_test/pages/details/widgets/details_tabs_widget.dart';
@@ -65,6 +66,9 @@ class DetailsContent extends StatelessWidget {
               ),
               const SizedBox(height: 7),
               BottomDetailsWidget(
+                onColorSelect: (index) => context
+                    .read<DetailsBloc>()
+                    .add(DetailsColorSelectEvent(index)),
                 onAddToCart: () {},
                 onFavorite: () => context
                     .read<DetailsBloc>()
@@ -76,6 +80,8 @@ class DetailsContent extends StatelessWidget {
                 camera: state.camera,
                 sd: state.sd,
                 ssd: state.ssd,
+                colors: state.color,
+                selectedColor: state.selectedColor,
               ),
             ],
           );
@@ -94,8 +100,11 @@ class BottomDetailsWidget extends StatelessWidget {
   final String sd;
   final bool isFavorite;
   final double rating;
+  final int selectedColor;
+  final List<String> colors;
   final VoidCallback onAddToCart;
   final VoidCallback onFavorite;
+  final ValueChanged<int> onColorSelect;
 
   const BottomDetailsWidget({
     super.key,
@@ -108,6 +117,9 @@ class BottomDetailsWidget extends StatelessWidget {
     required this.camera,
     required this.ssd,
     required this.sd,
+    required this.selectedColor,
+    required this.colors,
+    required this.onColorSelect,
   });
 
   @override
@@ -129,6 +141,7 @@ class BottomDetailsWidget extends StatelessWidget {
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 28),
           Row(
@@ -177,7 +190,7 @@ class BottomDetailsWidget extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 27),
             child: DetailsTabsWidget(),
           ),
-          const SizedBox(height: 32),
+          const SizedBox(height: 30),
           Row(
             children: [
               const SizedBox(width: 30),
@@ -214,6 +227,29 @@ class BottomDetailsWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 30),
+            ],
+          ),
+          const SizedBox(height: 30),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 34),
+            child: Text(
+              'Select color and capacity',
+              style: const AppTextStyle().copyWith(
+                fontWeight: FontWeight.w500,
+                fontSize: 16,
+                height: 20 / 16,
+              ),
+            ),
+          ),
+          const SizedBox(height: 14),
+          Row(
+            children: [
+              const SizedBox(width: 34),
+              ColorsSelectorWidget(
+                colors: colors,
+                selectedColor: selectedColor,
+                onSelect: onColorSelect,
+              ),
             ],
           ),
           const SizedBox(height: 36),

@@ -54,5 +54,25 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
         ));
       }
     });
+    on<DetailsColorSelectEvent>((event, emit) async {
+      if (state is DetailsLoaded) {
+        final loadedState = state as DetailsLoaded;
+        emit(DetailsLoaded(
+          cpu: loadedState.cpu,
+          camera: loadedState.camera,
+          selectedColor: event.selectedColor,
+          selectedCapacity: loadedState.selectedCapacity,
+          ssd: loadedState.ssd,
+          capacity: [...loadedState.capacity],
+          color: [...loadedState.color],
+          images: [...loadedState.images],
+          isFavorites: loadedState.isFavorites,
+          price: loadedState.price,
+          title: loadedState.title,
+          rating: loadedState.rating,
+          sd: loadedState.sd,
+        ));
+      }
+    });
   }
 }
