@@ -26,3 +26,12 @@ class DetailsColorSelectEvent extends DetailsEvent {
   @override
   List<Object> get props => [selectedColor];
 }
+
+class DetailsCapacitySelectEvent extends DetailsEvent {
+  final int selectedCapacity;
+
+  const DetailsCapacitySelectEvent(this.selectedCapacity);
+
+  @override
+  List<Object> get props => [selectedCapacity];
+}

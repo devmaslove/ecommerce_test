@@ -1,4 +1,5 @@
 import 'package:ecommerce_test/pages/details/bloc/details_bloc.dart';
+import 'package:ecommerce_test/pages/details/widgets/capacity_selector_widget.dart';
 import 'package:ecommerce_test/pages/details/widgets/colors_selector_widget.dart';
 import 'package:ecommerce_test/pages/details/widgets/details_carousel_widget.dart';
 import 'package:ecommerce_test/pages/details/widgets/details_info_widget.dart';
@@ -66,6 +67,9 @@ class DetailsContent extends StatelessWidget {
               ),
               const SizedBox(height: 7),
               BottomDetailsWidget(
+                onCapacitySelect: (index) => context
+                    .read<DetailsBloc>()
+                    .add(DetailsCapacitySelectEvent(index)),
                 onColorSelect: (index) => context
                     .read<DetailsBloc>()
                     .add(DetailsColorSelectEvent(index)),
@@ -82,6 +86,8 @@ class DetailsContent extends StatelessWidget {
                 ssd: state.ssd,
                 colors: state.color,
                 selectedColor: state.selectedColor,
+                selectedCapacity: state.selectedCapacity,
+                capacities: state.capacity,
               ),
             ],
           );
@@ -105,6 +111,9 @@ class BottomDetailsWidget extends StatelessWidget {
   final VoidCallback onAddToCart;
   final VoidCallback onFavorite;
   final ValueChanged<int> onColorSelect;
+  final int selectedCapacity;
+  final List<String> capacities;
+  final ValueChanged<int> onCapacitySelect;
 
   const BottomDetailsWidget({
     super.key,
@@ -120,6 +129,9 @@ class BottomDetailsWidget extends StatelessWidget {
     required this.selectedColor,
     required this.colors,
     required this.onColorSelect,
+    required this.selectedCapacity,
+    required this.capacities,
+    required this.onCapacitySelect,
   });
 
   @override
@@ -250,6 +262,14 @@ class BottomDetailsWidget extends StatelessWidget {
                 selectedColor: selectedColor,
                 onSelect: onColorSelect,
               ),
+              const SizedBox(width: 18),
+              const Spacer(),
+              CapacitySelectorWidget(
+                capacities: capacities,
+                selectedCapacity: selectedCapacity,
+                onSelect: onCapacitySelect,
+              ),
+              const SizedBox(width: 34),
             ],
           ),
           const SizedBox(height: 36),
