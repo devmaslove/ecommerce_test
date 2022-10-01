@@ -92,6 +92,28 @@ class DetailsContent extends StatelessWidget {
             ],
           );
         }
+        if (state is DetailsErrorNetwork) {
+          return Column(
+            children: [
+              const SizedBox(height: 30),
+              DetailsTitleWidget(
+                onBack: () => Navigator.of(context).pop(),
+                onCart: () => Navigator.of(context).pop(),
+              ),
+              const SizedBox(height: 30),
+              Expanded(
+                child: Center(
+                  child: Text(
+                    'Не удалось загрузить данные',
+                    style: const AppTextStyle().copyWith(
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          );
+        }
         return const SizedBox.shrink();
       },
     );

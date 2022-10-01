@@ -14,6 +14,11 @@ class DetailsLoading extends DetailsState {
   List<Object> get props => [];
 }
 
+class DetailsErrorNetwork extends DetailsState {
+  @override
+  List<Object> get props => [];
+}
+
 class DetailsLoaded extends DetailsState {
   final String cpu;
   final String camera;
