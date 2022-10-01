@@ -66,4 +66,36 @@ class DetailsLoaded extends DetailsState {
         selectedColor,
         selectedCapacity,
       ];
+
+  DetailsLoaded copyWith({
+    String? cpu,
+    String? camera,
+    List<String>? capacity,
+    List<String>? color,
+    List<String>? images,
+    bool? isFavorites,
+    double? price,
+    double? rating,
+    String? sd,
+    String? ssd,
+    String? title,
+    int? selectedColor,
+    int? selectedCapacity,
+  }) {
+    return DetailsLoaded(
+      cpu: cpu ?? this.cpu,
+      camera: camera ?? this.camera,
+      capacity: capacity != null ? [...capacity] : [...this.capacity],
+      color: color != null ? [...color] : [...this.color],
+      images: images != null ? [...images] : [...this.images],
+      isFavorites: isFavorites ?? this.isFavorites,
+      price: price ?? this.price,
+      rating: rating ?? this.rating,
+      sd: sd ?? this.sd,
+      ssd: ssd ?? this.ssd,
+      title: title ?? this.title,
+      selectedColor: selectedColor ?? this.selectedColor,
+      selectedCapacity: selectedCapacity ?? this.selectedCapacity,
+    );
+  }
 }
