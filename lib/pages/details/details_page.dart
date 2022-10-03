@@ -8,10 +8,12 @@ import 'package:ecommerce_test/pages/details/widgets/details_title_widget.dart';
 import 'package:ecommerce_test/resources/app_colors.dart';
 import 'package:ecommerce_test/resources/app_images.dart';
 import 'package:ecommerce_test/resources/app_text_style.dart';
+import 'package:ecommerce_test/widgets/big_botton_widget.dart';
 import 'package:ecommerce_test/widgets/color_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:intl/intl.dart';
 
 class DetailsPage extends StatelessWidget {
   const DetailsPage({Key? key}) : super(key: key);
@@ -52,6 +54,7 @@ class DetailsContent extends StatelessWidget {
           );
         }
         if (state is DetailsLoaded) {
+          final oCcy = NumberFormat("\$#,##0.00", "en_US");
           return Column(
             children: [
               const SizedBox(height: 30),
@@ -88,6 +91,7 @@ class DetailsContent extends StatelessWidget {
                 selectedColor: state.selectedColor,
                 selectedCapacity: state.selectedCapacity,
                 capacities: state.capacity,
+                price: oCcy.format(state.price),
               ),
             ],
           );
@@ -122,6 +126,7 @@ class DetailsContent extends StatelessWidget {
 
 class BottomDetailsWidget extends StatelessWidget {
   final String title;
+  final String price;
   final String cpu;
   final String camera;
   final String ssd;
@@ -142,6 +147,7 @@ class BottomDetailsWidget extends StatelessWidget {
     required this.onAddToCart,
     required this.onFavorite,
     required this.title,
+    required this.price,
     required this.isFavorite,
     required this.rating,
     required this.cpu,
@@ -293,6 +299,15 @@ class BottomDetailsWidget extends StatelessWidget {
               ),
               const SizedBox(width: 34),
             ],
+          ),
+          const SizedBox(height: 28),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: BigButtonWidget(
+              text: 'Add to Card',
+              textRight: price,
+              onPressed: onAddToCart,
+            ),
           ),
           const SizedBox(height: 36),
         ],
