@@ -45,6 +45,7 @@ class DetailsContent extends StatelessWidget {
               DetailsTitleWidget(
                 onBack: () => Navigator.of(context).pop(),
                 onCart: () => Navigator.of(context).pop(),
+                cartCount: 0,
               ),
               const SizedBox(height: 30),
               const Expanded(
@@ -61,6 +62,7 @@ class DetailsContent extends StatelessWidget {
               DetailsTitleWidget(
                 onBack: () => Navigator.of(context).pop(),
                 onCart: () => Navigator.of(context).pop(),
+                cartCount: state.countCart,
               ),
               const SizedBox(height: 30),
               Expanded(
@@ -76,7 +78,9 @@ class DetailsContent extends StatelessWidget {
                 onColorSelect: (index) => context
                     .read<DetailsBloc>()
                     .add(DetailsColorSelectEvent(index)),
-                onAddToCart: () {},
+                onAddToCart: () => context
+                    .read<DetailsBloc>()
+                    .add(const DetailsAddToCartEvent()),
                 onFavorite: () => context
                     .read<DetailsBloc>()
                     .add(const DetailsToggleFavoriteEvent()),
@@ -103,6 +107,7 @@ class DetailsContent extends StatelessWidget {
               DetailsTitleWidget(
                 onBack: () => Navigator.of(context).pop(),
                 onCart: () => Navigator.of(context).pop(),
+                cartCount: 0,
               ),
               const SizedBox(height: 30),
               Expanded(

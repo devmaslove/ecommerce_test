@@ -33,6 +33,7 @@ class DetailsLoaded extends DetailsState {
   final String title;
   final int selectedColor;
   final int selectedCapacity;
+  final int countCart;
 
   const DetailsLoaded({
     required this.cpu,
@@ -48,6 +49,7 @@ class DetailsLoaded extends DetailsState {
     required this.title,
     required this.selectedColor,
     required this.selectedCapacity,
+    required this.countCart,
   });
 
   @override
@@ -65,6 +67,7 @@ class DetailsLoaded extends DetailsState {
         title,
         selectedColor,
         selectedCapacity,
+        countCart,
       ];
 
   DetailsLoaded copyWith({
@@ -81,6 +84,7 @@ class DetailsLoaded extends DetailsState {
     String? title,
     int? selectedColor,
     int? selectedCapacity,
+    int? countCart,
   }) {
     return DetailsLoaded(
       cpu: cpu ?? this.cpu,
@@ -96,6 +100,7 @@ class DetailsLoaded extends DetailsState {
       title: title ?? this.title,
       selectedColor: selectedColor ?? this.selectedColor,
       selectedCapacity: selectedCapacity ?? this.selectedCapacity,
+      countCart: countCart ?? this.countCart,
     );
   }
 }

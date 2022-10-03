@@ -35,3 +35,10 @@ class DetailsCapacitySelectEvent extends DetailsEvent {
   @override
   List<Object> get props => [selectedCapacity];
 }
+
+class DetailsAddToCartEvent extends DetailsEvent {
+  const DetailsAddToCartEvent();
+
+  @override
+  List<Object> get props => [];
+}

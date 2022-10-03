@@ -26,6 +26,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
             title: details.title ?? '',
             rating: details.rating?.toDouble() ?? 0,
             sd: details.sd ?? '',
+            countCart: 0,
           ),
         );
       } catch (e) {
@@ -53,6 +54,14 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
         final loadedState = state as DetailsLoaded;
         emit(loadedState.copyWith(
           selectedCapacity: event.selectedCapacity,
+        ));
+      }
+    });
+    on<DetailsAddToCartEvent>((event, emit) async {
+      if (state is DetailsLoaded) {
+        final loadedState = state as DetailsLoaded;
+        emit(loadedState.copyWith(
+          countCart: loadedState.countCart + 1,
         ));
       }
     });
