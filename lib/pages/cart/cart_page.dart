@@ -53,7 +53,74 @@ class CartContent extends StatelessWidget {
           final oCcy = NumberFormat("\$#,##0 us", "en_US");
           return Column(
             children: [
-              const Spacer(),
+              Expanded(
+                child: ListView.separated(
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  itemCount: state.items.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Row(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          clipBehavior: Clip.antiAlias,
+                          child: Image.network(
+                            state.items[index].images,
+                            fit: BoxFit.fitHeight,
+                            width: 88,
+                            height: 88,
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                state.items[index].title,
+                                style: const AppTextStyle().copyWith(
+                                  fontSize: 20,
+                                  height: 25 / 20,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white,
+                                ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 6),
+                              Text(
+                                '\$${state.items[index].price.toDouble().toStringAsFixed(2)}',
+                                style: const AppTextStyle().copyWith(
+                                  fontSize: 20,
+                                  height: 25 / 20,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.accent,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        IconButton(
+                          color: Colors.white,
+                          icon: const Icon(Icons.delete_outline),
+                          onPressed: () => context
+                              .read<CartBloc>()
+                              .add(CartRemoveItemEvent(index)),
+                        )
+                      ],
+                    );
+                  },
+                  separatorBuilder: (_, __) {
+                    return const SizedBox(height: 44);
+                  },
+                ),
+              ),
               Divider(
                 height: 2,
                 color: Colors.white.withOpacity(0.25),
