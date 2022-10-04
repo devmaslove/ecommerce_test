@@ -54,93 +54,107 @@ class CartContent extends StatelessWidget {
           return Column(
             children: [
               Expanded(
-                child: ListView.separated(
-                  padding: const EdgeInsets.symmetric(horizontal: 32),
-                  itemCount: state.items.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Row(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
+                child: state.items.isEmpty
+                    ? Padding(
+                        padding: const EdgeInsets.all(32),
+                        child: Text(
+                          'Your cart is currently no products',
+                          style: const AppTextStyle().copyWith(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          clipBehavior: Clip.antiAlias,
-                          child: Image.network(
-                            state.items[index].images,
-                            fit: BoxFit.fitHeight,
-                            width: 88,
-                            height: 88,
+                            fontSize: 20,
                           ),
                         ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
+                      )
+                    : ListView.separated(
+                        padding: const EdgeInsets.symmetric(horizontal: 32),
+                        itemCount: state.items.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Row(
                             children: [
-                              Text(
-                                state.items[index].title,
-                                style: const AppTextStyle().copyWith(
-                                  fontSize: 20,
-                                  height: 25 / 20,
-                                  fontWeight: FontWeight.w500,
+                              Container(
+                                decoration: BoxDecoration(
                                   color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              const SizedBox(height: 6),
-                              Text(
-                                '\$${state.items[index].price.toDouble().toStringAsFixed(2)}',
-                                style: const AppTextStyle().copyWith(
-                                  fontSize: 20,
-                                  height: 25 / 20,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColors.accent,
+                                clipBehavior: Clip.antiAlias,
+                                child: Image.network(
+                                  state.items[index].images,
+                                  fit: BoxFit.fitHeight,
+                                  width: 88,
+                                  height: 88,
                                 ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
                               ),
+                              const SizedBox(width: 16),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      state.items[index].title,
+                                      style: const AppTextStyle().copyWith(
+                                        fontSize: 20,
+                                        height: 25 / 20,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.white,
+                                      ),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    const SizedBox(height: 6),
+                                    Text(
+                                      '\$${state.items[index].price.toDouble().toStringAsFixed(2)}',
+                                      style: const AppTextStyle().copyWith(
+                                        fontSize: 20,
+                                        height: 25 / 20,
+                                        fontWeight: FontWeight.w500,
+                                        color: AppColors.accent,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(width: 16),
+                              IconButton(
+                                color: Colors.white,
+                                icon: const Icon(Icons.delete_outline),
+                                onPressed: () => context
+                                    .read<CartBloc>()
+                                    .add(CartRemoveItemEvent(index)),
+                              )
                             ],
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        IconButton(
-                          color: Colors.white,
-                          icon: const Icon(Icons.delete_outline),
-                          onPressed: () => context
-                              .read<CartBloc>()
-                              .add(CartRemoveItemEvent(index)),
-                        )
-                      ],
-                    );
-                  },
-                  separatorBuilder: (_, __) {
-                    return const SizedBox(height: 44);
-                  },
+                          );
+                        },
+                        separatorBuilder: (_, __) {
+                          return const SizedBox(height: 44);
+                        },
+                      ),
+              ),
+              if (state.items.isNotEmpty)
+                Divider(
+                  height: 2,
+                  color: Colors.white.withOpacity(0.25),
                 ),
-              ),
-              Divider(
-                height: 2,
-                color: Colors.white.withOpacity(0.25),
-              ),
-              const SizedBox(height: 16),
-              Padding(
-                padding: const EdgeInsets.only(left: 55, right: 35),
-                child: TwoColumnTextWidget(
-                  leftText: 'Total',
-                  rightText: oCcy.format(state.total),
+              if (state.items.isNotEmpty) const SizedBox(height: 16),
+              if (state.items.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(left: 55, right: 35),
+                  child: TwoColumnTextWidget(
+                    leftText: 'Total',
+                    rightText: oCcy.format(state.total),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 12),
-              Padding(
-                padding: const EdgeInsets.only(left: 55, right: 35),
-                child: TwoColumnTextWidget(
-                  leftText: 'Delivery',
-                  rightText: state.delivery,
+              if (state.items.isNotEmpty) const SizedBox(height: 12),
+              if (state.items.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(left: 55, right: 35),
+                  child: TwoColumnTextWidget(
+                    leftText: 'Delivery',
+                    rightText: state.delivery,
+                  ),
                 ),
-              ),
               const SizedBox(height: 28),
               Divider(
                 height: 1,
@@ -150,8 +164,10 @@ class CartContent extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 44),
                 child: BigButtonWidget(
-                  text: 'Checkout',
-                  onPressed: () {},
+                  text: state.items.isEmpty ? 'Start shopping' : 'Checkout',
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
                 ),
               ),
               const SizedBox(height: 44),
