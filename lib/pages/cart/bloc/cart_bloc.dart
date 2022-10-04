@@ -37,8 +37,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         final loadedState = state as CartLoaded;
         final items = [...loadedState.items];
         items.removeAt(event.index);
+        final total = items.fold<int>(0, (sum, item) => sum + item.price);
         emit(loadedState.copyWith(
           items: items,
+          total: total,
         ));
       }
     });
