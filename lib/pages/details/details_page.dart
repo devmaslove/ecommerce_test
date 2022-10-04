@@ -1,3 +1,4 @@
+import 'package:ecommerce_test/pages/cart/cart_page.dart';
 import 'package:ecommerce_test/pages/details/bloc/details_bloc.dart';
 import 'package:ecommerce_test/pages/details/widgets/capacity_selector_widget.dart';
 import 'package:ecommerce_test/pages/details/widgets/colors_selector_widget.dart';
@@ -44,7 +45,11 @@ class DetailsContent extends StatelessWidget {
               const SizedBox(height: 30),
               DetailsTitleWidget(
                 onBack: () => Navigator.of(context).pop(),
-                onCart: () => Navigator.of(context).pop(),
+                onCart: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => const CartPage(),
+                  ),
+                ),
                 cartCount: 0,
               ),
               const SizedBox(height: 30),
@@ -61,7 +66,11 @@ class DetailsContent extends StatelessWidget {
               const SizedBox(height: 30),
               DetailsTitleWidget(
                 onBack: () => Navigator.of(context).pop(),
-                onCart: () => Navigator.of(context).pop(),
+                onCart: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => const CartPage(),
+                  ),
+                ),
                 cartCount: state.countCart,
               ),
               const SizedBox(height: 30),
@@ -106,7 +115,11 @@ class DetailsContent extends StatelessWidget {
               const SizedBox(height: 30),
               DetailsTitleWidget(
                 onBack: () => Navigator.of(context).pop(),
-                onCart: () => Navigator.of(context).pop(),
+                onCart: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => const CartPage(),
+                  ),
+                ),
                 cartCount: 0,
               ),
               const SizedBox(height: 30),
