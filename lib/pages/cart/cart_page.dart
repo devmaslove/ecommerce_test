@@ -1,17 +1,25 @@
+import 'package:ecommerce_test/pages/cart/bloc/cart_bloc.dart';
 import 'package:ecommerce_test/resources/app_colors.dart';
+import 'package:ecommerce_test/resources/app_text_style.dart';
+import 'package:ecommerce_test/widgets/big_botton_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.dark,
-      appBar: AppBar(
+    return BlocProvider(
+      create: (_) => CartBloc()..add(const CartLoadEvent()),
+      child: Scaffold(
         backgroundColor: AppColors.dark,
+        appBar: AppBar(
+          backgroundColor: AppColors.dark,
+        ),
+        body: const CartContent(),
       ),
-      body: const CartContent(),
     );
   }
 }
@@ -21,6 +29,110 @@ class CartContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return BlocBuilder<CartBloc, CartState>(
+      builder: (context, state) {
+        if (state is CartLoading) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Colors.white,
+            ),
+          );
+        }
+        if (state is CartErrorNetwork) {
+          return Center(
+            child: Text(
+              'Не удалось загрузить данные',
+              style: const AppTextStyle().copyWith(
+                color: Colors.white,
+                fontSize: 20,
+              ),
+            ),
+          );
+        }
+        if (state is CartLoaded) {
+          final oCcy = NumberFormat("\$#,##0 us", "en_US");
+          return Column(
+            children: [
+              const Spacer(),
+              Divider(
+                height: 2,
+                color: Colors.white.withOpacity(0.25),
+              ),
+              const SizedBox(height: 16),
+              Padding(
+                padding: const EdgeInsets.only(left: 55, right: 35),
+                child: TwoColumnTextWidget(
+                  leftText: 'Total',
+                  rightText: oCcy.format(state.total),
+                ),
+              ),
+              const SizedBox(height: 12),
+              Padding(
+                padding: const EdgeInsets.only(left: 55, right: 35),
+                child: TwoColumnTextWidget(
+                  leftText: 'Delivery',
+                  rightText: state.delivery,
+                ),
+              ),
+              const SizedBox(height: 28),
+              Divider(
+                height: 1,
+                color: Colors.white.withOpacity(0.20),
+              ),
+              const SizedBox(height: 24),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 44),
+                child: BigButtonWidget(
+                  text: 'Checkout',
+                  onPressed: () {},
+                ),
+              ),
+              const SizedBox(height: 44),
+            ],
+          );
+        }
+        return const SizedBox.shrink();
+      },
+    );
+  }
+}
+
+class TwoColumnTextWidget extends StatelessWidget {
+  final String leftText;
+  final String rightText;
+
+  const TwoColumnTextWidget({
+    super.key,
+    required this.leftText,
+    required this.rightText,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text(
+          leftText,
+          style: const AppTextStyle().copyWith(
+            fontSize: 15,
+            height: 19 / 15,
+            color: Colors.white,
+          ),
+        ),
+        const Spacer(),
+        SizedBox(
+          width: 80,
+          child: Text(
+            rightText,
+            style: const AppTextStyle().copyWith(
+              fontSize: 15,
+              fontWeight: FontWeight.w700,
+              height: 19 / 15,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
