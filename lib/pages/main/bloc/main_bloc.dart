@@ -14,6 +14,7 @@ class MainBloc extends Bloc<MainEvent, MainState> {
     on<MainLoadEvent>((event, emit) async {
       emit(MainLoading());
       try {
+        await Future.delayed(const Duration(milliseconds: 2500));
         final mainData = await DataProvider().getMain();
         emit(
           MainLoaded(

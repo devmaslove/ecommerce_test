@@ -7,6 +7,7 @@ import 'package:ecommerce_test/pages/main/widgets/hot_sale_widget.dart';
 import 'package:ecommerce_test/resources/app_colors.dart';
 import 'package:ecommerce_test/resources/app_images.dart';
 import 'package:ecommerce_test/resources/app_text_style.dart';
+import 'package:ecommerce_test/widgets/big_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -18,136 +19,228 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => MainBloc()..add(const MainLoadEvent()),
-      child: Scaffold(
-        appBar: AppBar(
-          actions: [
-            IconButton(
-              icon: SvgPicture.asset(
-                AppImages.filter,
-                width: 11,
-                height: 13,
-              ),
-              tooltip: 'Open filter',
-              onPressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  backgroundColor: Colors.white,
-                  isScrollControlled: true,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(30),
-                    ),
-                  ),
-                  builder: (context) {
-                    return const FilterOptionsBottomSheet();
-                  },
-                );
-              },
-            ),
-            const SizedBox(width: 17),
-          ],
-        ),
-        body: const MainPageContent(),
-      ),
+      child: const MainPageContent(),
     );
   }
 }
 
 class MainPageContent extends StatelessWidget {
-  const MainPageContent({Key? key}) : super(key: key);
+  const MainPageContent({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MainBloc, MainState>(
       builder: (context, state) {
         if (state is MainLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const MainPageLoading();
         }
         if (state is MainErrorNetwork) {
-          return Center(
-            child: Text(
-              'Failed to load data',
-              style: const AppTextStyle().copyWith(
-                fontSize: 20,
-              ),
-            ),
-          );
+          return const MainPageErrorNetwork();
         }
         if (state is MainLoaded) {
-          return ListView(
-            children: [
-              ListTitle(
-                title: 'Select Category',
-                buttonText: 'view all',
-                onPressed: () {},
-              ),
-              ListCategories(
-                selectedCategory: state.selectedCategory,
-                onSelectCategory: (String category) {
-                  context.read<MainBloc>().add(
-                        MainSelectCategoryEvent(category),
-                      );
-                },
-              ),
-              ListHotSales(
-                children: [
-                  ...state.itemsHome
-                      .map(
-                        (item) => HotSaleWidget(
-                          title: item.title,
-                          onBuy: item.isBuy
-                              ? () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          const DetailsPage(),
-                                    ),
-                                  );
-                                }
-                              : null,
-                          isNew: item.isNew,
-                          subtitle: item.subtitle,
-                          picture: item.picture,
-                        ),
-                      )
-                      .toList(),
-                ],
-              ),
-              ListTitle(
-                title: 'Best Seller',
-                buttonText: 'see more',
-                onPressed: () {},
-              ),
-              ListBestSellers(
-                children: [
-                  ...state.itemsBest
-                      .map(
-                        (item) => BestSellerWidget(
-                          picture: item.picture,
-                          isFavorite: item.isFavorites,
-                          title: item.title,
-                          discountPrice: item.priceWithDiscount,
-                          price: item.price,
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    const DetailsPage(),
-                              ),
-                            );
-                          },
-                        ),
-                      )
-                      .toList(),
-                ],
-              ),
-            ],
-          );
+          return MainPageLoaded(state);
         }
         return const SizedBox.shrink();
       },
+    );
+  }
+}
+
+class MainPageLoaded extends StatelessWidget {
+  final MainLoaded state;
+
+  const MainPageLoaded(
+    this.state, {
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: SvgPicture.asset(
+              AppImages.filter,
+              width: 11,
+              height: 13,
+            ),
+            tooltip: 'Open filter',
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                backgroundColor: Colors.white,
+                isScrollControlled: true,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(30),
+                  ),
+                ),
+                builder: (context) {
+                  return const FilterOptionsBottomSheet();
+                },
+              );
+            },
+          ),
+          const SizedBox(width: 17),
+        ],
+      ),
+      body: ListView(
+        children: [
+          ListTitle(
+            title: 'Select Category',
+            buttonText: 'view all',
+            onPressed: () {},
+          ),
+          ListCategories(
+            selectedCategory: state.selectedCategory,
+            onSelectCategory: (String category) {
+              context.read<MainBloc>().add(
+                    MainSelectCategoryEvent(category),
+                  );
+            },
+          ),
+          ListHotSales(
+            children: [
+              ...state.itemsHome
+                  .map(
+                    (item) => HotSaleWidget(
+                      title: item.title,
+                      onBuy: item.isBuy
+                          ? () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      const DetailsPage(),
+                                ),
+                              );
+                            }
+                          : null,
+                      isNew: item.isNew,
+                      subtitle: item.subtitle,
+                      picture: item.picture,
+                    ),
+                  )
+                  .toList(),
+            ],
+          ),
+          ListTitle(
+            title: 'Best Seller',
+            buttonText: 'see more',
+            onPressed: () {},
+          ),
+          ListBestSellers(
+            children: [
+              ...state.itemsBest
+                  .map(
+                    (item) => BestSellerWidget(
+                      picture: item.picture,
+                      isFavorite: item.isFavorites,
+                      title: item.title,
+                      discountPrice: item.priceWithDiscount,
+                      price: item.price,
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                const DetailsPage(),
+                          ),
+                        );
+                      },
+                    ),
+                  )
+                  .toList(),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MainPageErrorNetwork extends StatelessWidget {
+  const MainPageErrorNetwork({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Failed to load data',
+                style: const AppTextStyle().copyWith(
+                  fontSize: 20,
+                ),
+              ),
+              const SizedBox(height: 20),
+              BigButtonWidget(
+                text: 'Retry',
+                onPressed: () {
+                  context.read<MainBloc>().add(
+                        const MainLoadEvent(),
+                      );
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class MainPageLoading extends StatelessWidget {
+  const MainPageLoading({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.dark,
+      body: Center(
+        child: Row(
+          children: [
+            const Spacer(),
+            Expanded(
+              flex: 2,
+              child: Stack(
+                children: [
+                  Container(
+                    width: 132,
+                    height: 132,
+                    decoration: const BoxDecoration(
+                      color: AppColors.accent,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                  Positioned(
+                    left: 34,
+                    top: 32,
+                    child: Text(
+                      'Ecommerce Concept'.replaceAll(' ', '\n'),
+                      style: const AppTextStyle().copyWith(
+                        color: Colors.white,
+                        fontSize: 30,
+                        height: 1.1,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
