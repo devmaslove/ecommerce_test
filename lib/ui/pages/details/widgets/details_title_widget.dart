@@ -1,8 +1,8 @@
 import 'package:badges/badges.dart';
-import 'package:ecommerce_test/resources/app_colors.dart';
-import 'package:ecommerce_test/resources/app_images.dart';
-import 'package:ecommerce_test/resources/app_text_style.dart';
-import 'package:ecommerce_test/widgets/color_button_widget.dart';
+import 'package:ecommerce_test/ui/resources/app_colors.dart';
+import 'package:ecommerce_test/ui/resources/app_images.dart';
+import 'package:ecommerce_test/ui/resources/app_text_style.dart';
+import 'package:ecommerce_test/ui/widgets/color_button_widget.dart';
 import 'package:flutter/material.dart';
 
 class DetailsTitleWidget extends StatelessWidget {

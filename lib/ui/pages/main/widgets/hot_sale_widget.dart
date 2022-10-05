@@ -1,5 +1,5 @@
-import 'package:ecommerce_test/resources/app_colors.dart';
-import 'package:ecommerce_test/resources/app_text_style.dart';
+import 'package:ecommerce_test/ui/resources/app_colors.dart';
+import 'package:ecommerce_test/ui/resources/app_text_style.dart';
 import 'package:flutter/material.dart';
 
 class HotSaleWidget extends StatelessWidget {

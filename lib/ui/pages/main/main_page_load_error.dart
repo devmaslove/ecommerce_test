@@ -1,5 +1,5 @@
-import 'package:ecommerce_test/resources/app_text_style.dart';
-import 'package:ecommerce_test/widgets/big_button_widget.dart';
+import 'package:ecommerce_test/ui/resources/app_text_style.dart';
+import 'package:ecommerce_test/ui/widgets/big_button_widget.dart';
 import 'package:flutter/material.dart';
 
 class MainPageLoadError extends StatelessWidget {

@@ -1,6 +1,6 @@
-import 'package:ecommerce_test/resources/app_colors.dart';
-import 'package:ecommerce_test/resources/app_images.dart';
-import 'package:ecommerce_test/resources/app_text_style.dart';
+import 'package:ecommerce_test/ui/resources/app_colors.dart';
+import 'package:ecommerce_test/ui/resources/app_images.dart';
+import 'package:ecommerce_test/ui/resources/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

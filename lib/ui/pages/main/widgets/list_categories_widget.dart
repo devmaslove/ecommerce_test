@@ -1,5 +1,5 @@
-import 'package:ecommerce_test/pages/main/widgets/category_widget.dart';
-import 'package:ecommerce_test/resources/app_images.dart';
+import 'package:ecommerce_test/ui/pages/main/widgets/category_widget.dart';
+import 'package:ecommerce_test/ui/resources/app_images.dart';
 import 'package:flutter/material.dart';
 
 class ListCategoriesWidget extends StatelessWidget {

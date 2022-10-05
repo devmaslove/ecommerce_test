@@ -1,7 +1,7 @@
-import 'package:ecommerce_test/pages/main/bloc/main_bloc.dart';
-import 'package:ecommerce_test/pages/main/main_page_load_error.dart';
-import 'package:ecommerce_test/pages/main/main_page_loaded.dart';
-import 'package:ecommerce_test/pages/main/main_page_loading.dart';
+import 'package:ecommerce_test/ui/pages/main/bloc/main_bloc.dart';
+import 'package:ecommerce_test/ui/pages/main/main_page_load_error.dart';
+import 'package:ecommerce_test/ui/pages/main/main_page_loaded.dart';
+import 'package:ecommerce_test/ui/pages/main/main_page_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

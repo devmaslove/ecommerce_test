@@ -1,5 +1,5 @@
 import 'package:ecommerce_test/data/data_provider.dart';
-import 'package:ecommerce_test/pages/cart/models/cart_item_model.dart';
+import 'package:ecommerce_test/ui/pages/cart/models/cart_item_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

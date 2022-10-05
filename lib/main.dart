@@ -1,5 +1,5 @@
-import 'package:ecommerce_test/pages/main/main_page.dart';
-import 'package:ecommerce_test/resources/app_colors.dart';
+import 'package:ecommerce_test/ui/pages/main/main_page.dart';
+import 'package:ecommerce_test/ui/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 
 void main() {
