@@ -6,7 +6,7 @@ import 'package:ecommerce_test/widgets/color_button_widget.dart';
 import 'package:flutter/material.dart';
 
 class FilterOptionsBottomSheet extends StatelessWidget {
-  const FilterOptionsBottomSheet({Key? key}) : super(key: key);
+  const FilterOptionsBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +26,7 @@ class FilterOptionsBottomSheet extends StatelessWidget {
                     imageWidth: 11,
                     imageHeight: 10,
                     color: AppColors.dark,
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
+                    onPressed: () => Navigator.of(context).pop(),
                   ),
                 ),
               ),
@@ -53,9 +51,7 @@ class FilterOptionsBottomSheet extends StatelessWidget {
                   child: ColorButtonWidget(
                     text: 'Done',
                     color: AppColors.accent,
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
+                    onPressed: () => Navigator.of(context).pop(),
                   ),
                 ),
               ),

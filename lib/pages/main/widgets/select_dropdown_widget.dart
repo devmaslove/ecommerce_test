@@ -33,9 +33,7 @@ class _SelectDropdownWidgetState extends State<SelectDropdownWidget> {
         padding: const EdgeInsets.symmetric(horizontal: 14),
         decoration: BoxDecoration(
           color: Colors.white,
-          border: Border.all(
-            color: const Color(0xFFDCDCDC),
-          ),
+          border: Border.all(color: AppColors.greyBorder),
           borderRadius: BorderRadius.circular(5),
         ),
         child: DropdownButton<String>(
@@ -55,8 +53,8 @@ class _SelectDropdownWidgetState extends State<SelectDropdownWidget> {
             color: AppColors.dark,
             fontWeight: FontWeight.w400,
           ),
-          iconDisabledColor: const Color(0xFFB3B3B3),
-          iconEnabledColor: const Color(0xFFB3B3B3),
+          iconDisabledColor: AppColors.greyDropDownIcon,
+          iconEnabledColor: AppColors.greyDropDownIcon,
           isExpanded: true,
           isDense: true,
           onChanged: (value) => setState(() => selectedValue = value),
@@ -66,7 +64,7 @@ class _SelectDropdownWidgetState extends State<SelectDropdownWidget> {
             AppImages.dropDown,
             width: 16,
             height: 8,
-            color: const Color(0xFFB3B3B3),
+            color: AppColors.greyDropDownIcon,
           ),
         ),
       ),
