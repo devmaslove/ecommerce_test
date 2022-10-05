@@ -1,17 +1,17 @@
-class Basket {
+class BasketData {
   int? id;
   String? images;
   int? price;
   String? title;
 
-  Basket({
+  BasketData({
     this.id,
     this.images,
     this.price,
     this.title,
   });
 
-  Basket.fromJson(dynamic json) {
+  BasketData.fromJson(dynamic json) {
     id = json['id'];
     images = json['images'];
     price = json['price'];

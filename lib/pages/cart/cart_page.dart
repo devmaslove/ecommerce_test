@@ -41,7 +41,7 @@ class CartContent extends StatelessWidget {
         if (state is CartErrorNetwork) {
           return Center(
             child: Text(
-              'Не удалось загрузить данные',
+              'Failed to load data',
               style: const AppTextStyle().copyWith(
                 color: Colors.white,
                 fontSize: 20,

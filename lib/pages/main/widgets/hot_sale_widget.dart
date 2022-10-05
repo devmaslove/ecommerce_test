@@ -7,7 +7,7 @@ class HotSaleWidget extends StatelessWidget {
   final String subtitle;
   final String picture;
   final bool isNew;
-  final VoidCallback onBuy;
+  final VoidCallback? onBuy;
 
   const HotSaleWidget({
     super.key,
@@ -39,33 +39,34 @@ class HotSaleWidget extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          Positioned(
-            left: 25,
-            bottom: 26,
-            child: ElevatedButton(
-              onPressed: onBuy,
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                elevation: 0,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
+          if (onBuy != null)
+            Positioned(
+              left: 25,
+              bottom: 26,
+              child: ElevatedButton(
+                onPressed: onBuy,
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                  elevation: 0,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 27,
+                    vertical: 5,
+                  ),
                 ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 27,
-                  vertical: 5,
-                ),
-              ),
-              child: Text(
-                'Buy now!',
-                style: const AppTextStyle().copyWith(
-                  fontFamily: 'SF Pro Display',
-                  fontSize: 11,
-                  height: 13 / 11,
-                  fontWeight: FontWeight.w700,
+                child: Text(
+                  'Buy now!',
+                  style: const AppTextStyle().copyWith(
+                    fontFamily: 'SF Pro Display',
+                    fontSize: 11,
+                    height: 13 / 11,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
             ),
-          ),
           Positioned(
             left: 25,
             bottom: 75,

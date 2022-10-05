@@ -1,7 +1,7 @@
 import 'basket_data.dart';
 
 class CartData {
-  List<Basket>? basket;
+  List<BasketData>? basket;
   String? delivery;
   String? id;
   int? total;
@@ -17,7 +17,7 @@ class CartData {
     if (json['basket'] != null) {
       basket = [];
       json['basket'].forEach((v) {
-        basket!.add(Basket.fromJson(v));
+        basket!.add(BasketData.fromJson(v));
       });
     }
     delivery = json['delivery'];

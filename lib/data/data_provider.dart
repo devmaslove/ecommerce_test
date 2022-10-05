@@ -1,6 +1,7 @@
 import 'package:ecommerce_test/data/dio_container.dart';
 import 'package:ecommerce_test/data/models/cart_data.dart';
 import 'package:ecommerce_test/data/models/details_data.dart';
+import 'package:ecommerce_test/data/models/main_data.dart';
 
 class DataProvider {
   final DioContainer _dioContainer = DioContainer();
@@ -8,6 +9,13 @@ class DataProvider {
   static DataProvider? _instance;
   factory DataProvider() => _instance ??= DataProvider._();
   DataProvider._();
+
+  Future<MainData> getMain() async {
+    final response = await _dioContainer.dio.get(
+      '/654bd15e-b121-49ba-a588-960956b15175',
+    );
+    return MainData.fromJson(response.data);
+  }
 
   Future<DetailsData> getDetails() async {
     final response = await _dioContainer.dio.get(

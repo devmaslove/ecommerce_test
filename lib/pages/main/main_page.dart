@@ -1,4 +1,5 @@
 import 'package:ecommerce_test/pages/details/details_page.dart';
+import 'package:ecommerce_test/pages/main/bloc/main_bloc.dart';
 import 'package:ecommerce_test/pages/main/filter_options_bottom_sheet.dart';
 import 'package:ecommerce_test/pages/main/widgets/best_seller_widget.dart';
 import 'package:ecommerce_test/pages/main/widgets/category_widget.dart';
@@ -7,32 +8,28 @@ import 'package:ecommerce_test/resources/app_colors.dart';
 import 'package:ecommerce_test/resources/app_images.dart';
 import 'package:ecommerce_test/resources/app_text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({super.key});
-
-  @override
-  State<MainPage> createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
-  String selectedCategory = 'Phones';
+class MainPage extends StatelessWidget {
+  const MainPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: SvgPicture.asset(
-              AppImages.filter,
-              width: 11,
-              height: 13,
-            ),
-            tooltip: 'Open filter',
-            onPressed: () {
-              showModalBottomSheet(
+    return BlocProvider(
+      create: (context) => MainBloc()..add(const MainLoadEvent()),
+      child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              icon: SvgPicture.asset(
+                AppImages.filter,
+                width: 11,
+                height: 13,
+              ),
+              tooltip: 'Open filter',
+              onPressed: () {
+                showModalBottomSheet(
                   context: context,
                   backgroundColor: Colors.white,
                   isScrollControlled: true,
@@ -43,141 +40,114 @@ class _MainPageState extends State<MainPage> {
                   ),
                   builder: (context) {
                     return const FilterOptionsBottomSheet();
-                  });
-            },
-          ),
-          const SizedBox(width: 17),
-        ],
+                  },
+                );
+              },
+            ),
+            const SizedBox(width: 17),
+          ],
+        ),
+        body: const MainPageContent(),
       ),
-      body: ListView(
-        children: [
-          ListTitle(
-            title: 'Select Category',
-            buttonText: 'view all',
-            onPressed: () {},
-          ),
-          ListCategories(
-            selectedCategory: selectedCategory,
-            onSelectCategory: (String category) {
-              setState(() => selectedCategory = category);
-            },
-          ),
-          ListHotSales(
+    );
+  }
+}
+
+class MainPageContent extends StatelessWidget {
+  const MainPageContent({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<MainBloc, MainState>(
+      builder: (context, state) {
+        if (state is MainLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (state is MainErrorNetwork) {
+          return Center(
+            child: Text(
+              'Failed to load data',
+              style: const AppTextStyle().copyWith(
+                fontSize: 20,
+              ),
+            ),
+          );
+        }
+        if (state is MainLoaded) {
+          return ListView(
             children: [
-              HotSaleWidget(
-                title: "Iphone 12",
-                onBuy: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => const DetailsPage(),
-                    ),
-                  );
-                },
-                isNew: true,
-                subtitle: "Súper. Mega. Rápido.",
-                picture:
-                    "https://img.ibxk.com.br/2020/09/23/23104013057475.jpg?w=1120&h=420&mode=crop&scale=both",
+              ListTitle(
+                title: 'Select Category',
+                buttonText: 'view all',
+                onPressed: () {},
               ),
-              HotSaleWidget(
-                title: "Samsung Galaxy A71",
-                onBuy: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => const DetailsPage(),
-                    ),
-                  );
+              ListCategories(
+                selectedCategory: state.selectedCategory,
+                onSelectCategory: (String category) {
+                  context.read<MainBloc>().add(
+                        MainSelectCategoryEvent(category),
+                      );
                 },
-                isNew: false,
-                subtitle: "Súper. Mega. Rápido.",
-                picture:
-                    "https://cdn-2.tstatic.net/kupang/foto/bank/images/pre-order-samsung-galaxy-a71-laris-manis-inilah-rekomendasi-ponsel-harga-rp-6-jutaan.jpg",
               ),
-              HotSaleWidget(
-                title: "Xiaomi Mi 11 ultra",
-                onBuy: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => const DetailsPage(),
-                    ),
-                  );
-                },
-                isNew: false,
-                subtitle: "Súper. Mega. Rápido.",
-                picture:
-                    "https://static.digit.in/default/942998b8b4d3554a6259aeb1a0124384dbe0d4d5.jpeg",
+              ListHotSales(
+                children: [
+                  ...state.itemsHome
+                      .map(
+                        (item) => HotSaleWidget(
+                          title: item.title,
+                          onBuy: item.isBuy
+                              ? () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          const DetailsPage(),
+                                    ),
+                                  );
+                                }
+                              : null,
+                          isNew: item.isNew,
+                          subtitle: item.subtitle,
+                          picture: item.picture,
+                        ),
+                      )
+                      .toList(),
+                ],
+              ),
+              ListTitle(
+                title: 'Best Seller',
+                buttonText: 'see more',
+                onPressed: () {},
+              ),
+              ListBestSellers(
+                children: [
+                  ...state.itemsBest
+                      .map(
+                        (item) => BestSellerWidget(
+                          picture: item.picture,
+                          isFavorite: item.isFavorites,
+                          title: item.title,
+                          discountPrice: item.priceWithDiscount,
+                          price: item.price,
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    const DetailsPage(),
+                              ),
+                            );
+                          },
+                        ),
+                      )
+                      .toList(),
+                ],
               ),
             ],
-          ),
-          ListTitle(
-            title: 'Best Seller',
-            buttonText: 'see more',
-            onPressed: () {},
-          ),
-          ListBestSellers(
-            children: [
-              BestSellerWidget(
-                picture:
-                    'https://shop.gadgetufa.ru/images/upload/52534-smartfon-samsung-galaxy-s20-ultra-12-128-chernyj_1024.jpg',
-                isFavorite: false,
-                title: 'Samsung Galaxy s20 Ultra',
-                discountPrice: 1047,
-                price: 1500,
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => const DetailsPage(),
-                    ),
-                  );
-                },
-              ),
-              BestSellerWidget(
-                picture:
-                    'https://mi92.ru/wp-content/uploads/2020/03/smartfon-xiaomi-mi-10-pro-12-256gb-global-version-starry-blue-sinij-1.jpg',
-                isFavorite: true,
-                title: 'Xiaomi Mi 10 Pro',
-                discountPrice: 300,
-                price: 400,
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => const DetailsPage(),
-                    ),
-                  );
-                },
-              ),
-              BestSellerWidget(
-                picture:
-                    'https://opt-1739925.ssl.1c-bitrix-cdn.ru/upload/iblock/c01/c014d088c28d45b606ed8c58e5817172.jpg?160405904823488',
-                isFavorite: true,
-                title: 'Samsung Note 20 Ultra',
-                discountPrice: 1047,
-                price: 1500,
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => const DetailsPage(),
-                    ),
-                  );
-                },
-              ),
-              BestSellerWidget(
-                picture: 'https://www.benchmark.rs/assets/img/news/edge1.jpg',
-                isFavorite: false,
-                title: 'Motorola One Edge',
-                discountPrice: 300,
-                price: 400,
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => const DetailsPage(),
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
-        ],
-      ),
+          );
+        }
+        return const SizedBox.shrink();
+      },
     );
   }
 }

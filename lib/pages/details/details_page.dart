@@ -126,7 +126,7 @@ class DetailsContent extends StatelessWidget {
               Expanded(
                 child: Center(
                   child: Text(
-                    'Не удалось загрузить данные',
+                    'Failed to load data',
                     style: const AppTextStyle().copyWith(
                       fontSize: 20,
                     ),
