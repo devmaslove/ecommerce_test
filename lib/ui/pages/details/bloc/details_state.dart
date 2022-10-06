@@ -22,11 +22,11 @@ class DetailsErrorNetwork extends DetailsState {
 class DetailsLoaded extends DetailsState {
   final String cpu;
   final String camera;
-  final List<String> capacity;
-  final List<String> color;
+  final List<String> capacities;
+  final List<Color> colors;
   final List<String> images;
   final bool isFavorites;
-  final double price;
+  final String price;
   final double rating;
   final String sd;
   final String ssd;
@@ -38,8 +38,8 @@ class DetailsLoaded extends DetailsState {
   const DetailsLoaded({
     required this.cpu,
     required this.camera,
-    required this.capacity,
-    required this.color,
+    required this.capacities,
+    required this.colors,
     required this.images,
     required this.isFavorites,
     required this.price,
@@ -56,8 +56,8 @@ class DetailsLoaded extends DetailsState {
   List<Object> get props => [
         cpu,
         camera,
-        capacity,
-        color,
+        capacities,
+        colors,
         images,
         isFavorites,
         price,
@@ -73,11 +73,11 @@ class DetailsLoaded extends DetailsState {
   DetailsLoaded copyWith({
     String? cpu,
     String? camera,
-    List<String>? capacity,
-    List<String>? color,
+    List<String>? capacities,
+    List<Color>? colors,
     List<String>? images,
     bool? isFavorites,
-    double? price,
+    String? price,
     double? rating,
     String? sd,
     String? ssd,
@@ -89,8 +89,8 @@ class DetailsLoaded extends DetailsState {
     return DetailsLoaded(
       cpu: cpu ?? this.cpu,
       camera: camera ?? this.camera,
-      capacity: capacity != null ? [...capacity] : [...this.capacity],
-      color: color != null ? [...color] : [...this.color],
+      capacities: capacities != null ? [...capacities] : [...this.capacities],
+      colors: colors != null ? [...colors] : [...this.colors],
       images: images != null ? [...images] : [...this.images],
       isFavorites: isFavorites ?? this.isFavorites,
       price: price ?? this.price,

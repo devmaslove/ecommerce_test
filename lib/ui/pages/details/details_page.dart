@@ -14,10 +14,9 @@ import 'package:ecommerce_test/ui/widgets/color_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:intl/intl.dart';
 
 class DetailsPage extends StatelessWidget {
-  const DetailsPage({Key? key}) : super(key: key);
+  const DetailsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +30,15 @@ class DetailsPage extends StatelessWidget {
 }
 
 class DetailsContent extends StatelessWidget {
-  const DetailsContent({
-    Key? key,
-  }) : super(key: key);
+  const DetailsContent({super.key});
+
+  void gotoCartPage(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (BuildContext context) => const CartPage(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,11 +50,7 @@ class DetailsContent extends StatelessWidget {
               const SizedBox(height: 30),
               DetailsTitleWidget(
                 onBack: () => Navigator.of(context).pop(),
-                onCart: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => const CartPage(),
-                  ),
-                ),
+                onCart: () => gotoCartPage(context),
                 cartCount: 0,
               ),
               const SizedBox(height: 30),
@@ -60,17 +61,12 @@ class DetailsContent extends StatelessWidget {
           );
         }
         if (state is DetailsLoaded) {
-          final oCcy = NumberFormat("\$#,##0.00", "en_US");
           return Column(
             children: [
               const SizedBox(height: 30),
               DetailsTitleWidget(
                 onBack: () => Navigator.of(context).pop(),
-                onCart: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => const CartPage(),
-                  ),
-                ),
+                onCart: () => gotoCartPage(context),
                 cartCount: state.countCart,
               ),
               const SizedBox(height: 30),
@@ -80,32 +76,7 @@ class DetailsContent extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 7),
-              BottomDetailsWidget(
-                onCapacitySelect: (index) => context
-                    .read<DetailsBloc>()
-                    .add(DetailsCapacitySelectEvent(index)),
-                onColorSelect: (index) => context
-                    .read<DetailsBloc>()
-                    .add(DetailsColorSelectEvent(index)),
-                onAddToCart: () => context
-                    .read<DetailsBloc>()
-                    .add(const DetailsAddToCartEvent()),
-                onFavorite: () => context
-                    .read<DetailsBloc>()
-                    .add(const DetailsToggleFavoriteEvent()),
-                title: state.title,
-                isFavorite: state.isFavorites,
-                rating: state.rating,
-                cpu: state.cpu,
-                camera: state.camera,
-                sd: state.sd,
-                ssd: state.ssd,
-                colors: state.color,
-                selectedColor: state.selectedColor,
-                selectedCapacity: state.selectedCapacity,
-                capacities: state.capacity,
-                price: oCcy.format(state.price),
-              ),
+              BottomDetailsWidget(state: state),
             ],
           );
         }
@@ -115,11 +86,7 @@ class DetailsContent extends StatelessWidget {
               const SizedBox(height: 30),
               DetailsTitleWidget(
                 onBack: () => Navigator.of(context).pop(),
-                onCart: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => const CartPage(),
-                  ),
-                ),
+                onCart: () => gotoCartPage(context),
                 cartCount: 0,
               ),
               const SizedBox(height: 30),
@@ -143,42 +110,16 @@ class DetailsContent extends StatelessWidget {
 }
 
 class BottomDetailsWidget extends StatelessWidget {
-  final String title;
-  final String price;
-  final String cpu;
-  final String camera;
-  final String ssd;
-  final String sd;
-  final bool isFavorite;
-  final double rating;
-  final int selectedColor;
-  final List<String> colors;
-  final VoidCallback onAddToCart;
-  final VoidCallback onFavorite;
-  final ValueChanged<int> onColorSelect;
-  final int selectedCapacity;
-  final List<String> capacities;
-  final ValueChanged<int> onCapacitySelect;
+  final DetailsLoaded state;
 
   const BottomDetailsWidget({
     super.key,
-    required this.onAddToCart,
-    required this.onFavorite,
-    required this.title,
-    required this.price,
-    required this.isFavorite,
-    required this.rating,
-    required this.cpu,
-    required this.camera,
-    required this.ssd,
-    required this.sd,
-    required this.selectedColor,
-    required this.colors,
-    required this.onColorSelect,
-    required this.selectedCapacity,
-    required this.capacities,
-    required this.onCapacitySelect,
+    required this.state,
   });
+
+  sendEvent(BuildContext context, final DetailsEvent event) {
+    context.read<DetailsBloc>().add(event);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -212,7 +153,7 @@ class BottomDetailsWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      title,
+                      state.title,
                       style: const AppTextStyle().copyWith(
                         fontSize: 24,
                         fontWeight: FontWeight.w500,
@@ -220,7 +161,7 @@ class BottomDetailsWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 7),
                     RatingBarIndicator(
-                      rating: rating,
+                      rating: state.rating,
                       itemBuilder: (context, index) => const Icon(
                         Icons.star,
                         color: AppColors.star,
@@ -234,11 +175,15 @@ class BottomDetailsWidget extends StatelessWidget {
               ),
               const SizedBox(width: 16),
               ColorButtonWidget(
-                imageAssetName: isFavorite ? AppImages.favOn : AppImages.favOff,
+                imageAssetName:
+                    state.isFavorites ? AppImages.favOn : AppImages.favOff,
                 imageWidth: 11,
                 imageHeight: 10,
                 color: AppColors.dark,
-                onPressed: onFavorite,
+                onPressed: () => sendEvent(
+                  context,
+                  const DetailsToggleFavoriteEvent(),
+                ),
               ),
               const SizedBox(width: 38),
             ],
@@ -254,7 +199,7 @@ class BottomDetailsWidget extends StatelessWidget {
               const SizedBox(width: 30),
               Expanded(
                 child: DetailsInfoWidget(
-                  text: cpu,
+                  text: state.cpu,
                   imageWidth: 28,
                   imageHeight: 28,
                   imageAssetName: AppImages.cpu,
@@ -262,7 +207,7 @@ class BottomDetailsWidget extends StatelessWidget {
               ),
               Expanded(
                 child: DetailsInfoWidget(
-                  text: camera,
+                  text: state.camera,
                   imageWidth: 28,
                   imageHeight: 22,
                   imageAssetName: AppImages.camera,
@@ -270,7 +215,7 @@ class BottomDetailsWidget extends StatelessWidget {
               ),
               Expanded(
                 child: DetailsInfoWidget(
-                  text: ssd,
+                  text: state.ssd,
                   imageWidth: 28,
                   imageHeight: 21,
                   imageAssetName: AppImages.ssd,
@@ -278,7 +223,7 @@ class BottomDetailsWidget extends StatelessWidget {
               ),
               Expanded(
                 child: DetailsInfoWidget(
-                  text: sd,
+                  text: state.sd,
                   imageWidth: 19,
                   imageHeight: 22,
                   imageAssetName: AppImages.sd,
@@ -304,16 +249,22 @@ class BottomDetailsWidget extends StatelessWidget {
             children: [
               const SizedBox(width: 34),
               ColorsSelectorWidget(
-                colors: colors,
-                selectedColor: selectedColor,
-                onSelect: onColorSelect,
+                colors: state.colors,
+                selectedColor: state.selectedColor,
+                onSelect: (index) => sendEvent(
+                  context,
+                  DetailsColorSelectEvent(index),
+                ),
               ),
               const SizedBox(width: 18),
               const Spacer(),
               CapacitySelectorWidget(
-                capacities: capacities,
-                selectedCapacity: selectedCapacity,
-                onSelect: onCapacitySelect,
+                capacities: state.capacities,
+                selectedCapacity: state.selectedCapacity,
+                onSelect: (index) => sendEvent(
+                  context,
+                  DetailsCapacitySelectEvent(index),
+                ),
               ),
               const SizedBox(width: 34),
             ],
@@ -323,8 +274,11 @@ class BottomDetailsWidget extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: BigButtonWidget(
               text: 'Add to Card',
-              textRight: price,
-              onPressed: onAddToCart,
+              textRight: state.price,
+              onPressed: () => sendEvent(
+                context,
+                const DetailsAddToCartEvent(),
+              ),
             ),
           ),
           const SizedBox(height: 36),

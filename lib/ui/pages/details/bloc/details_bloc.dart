@@ -1,6 +1,8 @@
 import 'package:ecommerce_test/data/data_provider.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 part 'details_event.dart';
 part 'details_state.dart';
@@ -11,6 +13,8 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
       emit(DetailsLoading());
       try {
         final details = await DataProvider().getDetails();
+        final colors = [...?details.color];
+        final capacities = [...?details.capacity];
         emit(
           DetailsLoaded(
             selectedColor: 0,
@@ -18,11 +22,13 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
             cpu: details.cpu ?? '',
             camera: details.camera ?? '',
             ssd: details.ssd ?? '',
-            capacity: [...?details.capacity],
-            color: [...?details.color],
+            capacities: capacities
+                .map((capacity) => _formatCapacity(capacity))
+                .toList(),
+            colors: colors.map((color) => _parseColor(color)).toList(),
             images: [...?details.images],
             isFavorites: details.isFavorites ?? false,
-            price: details.price?.toDouble() ?? 0,
+            price: _formatPrice(details.price?.toDouble() ?? 0),
             title: details.title ?? '',
             rating: details.rating?.toDouble() ?? 0,
             sd: details.sd ?? '',
@@ -65,5 +71,26 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
         ));
       }
     });
+  }
+
+  String _formatPrice(final double price) {
+    final oCcy = NumberFormat("\$#,##0.00", "en_US");
+    return oCcy.format(price);
+  }
+
+  String _formatCapacity(final String capacity) {
+    return '$capacity GB';
+  }
+
+  Color _parseColor(final String color) {
+    final r = color.substring(1, 3);
+    final g = color.substring(3, 5);
+    final b = color.substring(5, 7);
+    return Color.fromRGBO(
+      int.parse(r, radix: 16),
+      int.parse(g, radix: 16),
+      int.parse(b, radix: 16),
+      1.0,
+    );
   }
 }

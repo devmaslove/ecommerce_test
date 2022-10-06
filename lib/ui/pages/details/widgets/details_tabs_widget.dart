@@ -3,9 +3,7 @@ import 'package:ecommerce_test/ui/resources/app_text_style.dart';
 import 'package:flutter/material.dart';
 
 class DetailsTabsWidget extends StatelessWidget {
-  const DetailsTabsWidget({
-    Key? key,
-  }) : super(key: key);
+  const DetailsTabsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

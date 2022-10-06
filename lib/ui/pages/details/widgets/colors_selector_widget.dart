@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ColorsSelectorWidget extends StatelessWidget {
   final int selectedColor;
-  final List<String> colors;
+  final List<Color> colors;
   final ValueChanged<int> onSelect;
 
   const ColorsSelectorWidget({
@@ -30,7 +30,7 @@ class ColorsSelectorWidget extends StatelessWidget {
 
 class _ColorWidget extends StatelessWidget {
   final bool selected;
-  final String color;
+  final Color color;
   final VoidCallback onTap;
 
   const _ColorWidget({
@@ -39,22 +39,10 @@ class _ColorWidget extends StatelessWidget {
     required this.onTap,
   });
 
-  Color parseColor(final String color) {
-    final r = color.substring(1, 3);
-    final g = color.substring(3, 5);
-    final b = color.substring(5, 7);
-    return Color.fromRGBO(
-      int.parse(r, radix: 16),
-      int.parse(g, radix: 16),
-      int.parse(b, radix: 16),
-      1.0,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: parseColor(color),
+      color: color,
       shape: const CircleBorder(),
       clipBehavior: Clip.antiAlias,
       child: InkWell(

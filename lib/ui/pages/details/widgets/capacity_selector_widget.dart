@@ -63,7 +63,7 @@ class _CapacityWidget extends StatelessWidget {
               bottom: 6,
             ),
             child: Text(
-              '$capacity GB',
+              capacity,
               textAlign: TextAlign.center,
               style: const AppTextStyle().copyWith(
                 color: selected ? Colors.white : AppColors.greyCapacity,
