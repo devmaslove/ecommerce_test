@@ -21,7 +21,7 @@ class CartErrorNetwork extends CartState {
 
 class CartLoaded extends CartState {
   final String delivery;
-  final int total;
+  final String total;
   final List<CartItemModel> items;
 
   const CartLoaded({
@@ -39,7 +39,7 @@ class CartLoaded extends CartState {
 
   CartLoaded copyWith({
     String? delivery,
-    int? total,
+    String? total,
     List<CartItemModel>? items,
   }) {
     return CartLoaded(

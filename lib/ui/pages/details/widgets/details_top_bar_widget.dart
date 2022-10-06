@@ -5,12 +5,12 @@ import 'package:ecommerce_test/ui/resources/app_text_style.dart';
 import 'package:ecommerce_test/ui/widgets/color_button_widget.dart';
 import 'package:flutter/material.dart';
 
-class DetailsTitleWidget extends StatelessWidget {
+class DetailsTopBarWidget extends StatelessWidget {
   final VoidCallback onBack;
   final VoidCallback onCart;
   final int cartCount;
 
-  const DetailsTitleWidget({
+  const DetailsTopBarWidget({
     super.key,
     required this.onBack,
     required this.onCart,

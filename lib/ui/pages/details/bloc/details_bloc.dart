@@ -27,7 +27,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
                 .toList(),
             colors: colors.map((color) => _parseColor(color)).toList(),
             images: [...?details.images],
-            isFavorites: details.isFavorites ?? false,
+            isFavorite: details.isFavorites ?? false,
             price: _formatPrice(details.price?.toDouble() ?? 0),
             title: details.title ?? '',
             rating: details.rating?.toDouble() ?? 0,
@@ -43,7 +43,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
       if (state is DetailsLoaded) {
         final loadedState = state as DetailsLoaded;
         emit(loadedState.copyWith(
-          isFavorites: !loadedState.isFavorites,
+          isFavorite: !loadedState.isFavorite,
         ));
       }
     });

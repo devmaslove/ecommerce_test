@@ -25,7 +25,7 @@ class DetailsLoaded extends DetailsState {
   final List<String> capacities;
   final List<Color> colors;
   final List<String> images;
-  final bool isFavorites;
+  final bool isFavorite;
   final String price;
   final double rating;
   final String sd;
@@ -41,7 +41,7 @@ class DetailsLoaded extends DetailsState {
     required this.capacities,
     required this.colors,
     required this.images,
-    required this.isFavorites,
+    required this.isFavorite,
     required this.price,
     required this.rating,
     required this.sd,
@@ -59,7 +59,7 @@ class DetailsLoaded extends DetailsState {
         capacities,
         colors,
         images,
-        isFavorites,
+        isFavorite,
         price,
         rating,
         sd,
@@ -76,7 +76,7 @@ class DetailsLoaded extends DetailsState {
     List<String>? capacities,
     List<Color>? colors,
     List<String>? images,
-    bool? isFavorites,
+    bool? isFavorite,
     String? price,
     double? rating,
     String? sd,
@@ -92,7 +92,7 @@ class DetailsLoaded extends DetailsState {
       capacities: capacities != null ? [...capacities] : [...this.capacities],
       colors: colors != null ? [...colors] : [...this.colors],
       images: images != null ? [...images] : [...this.images],
-      isFavorites: isFavorites ?? this.isFavorites,
+      isFavorite: isFavorite ?? this.isFavorite,
       price: price ?? this.price,
       rating: rating ?? this.rating,
       sd: sd ?? this.sd,
