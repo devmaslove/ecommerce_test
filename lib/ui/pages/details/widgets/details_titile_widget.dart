@@ -12,12 +12,12 @@ class DetailsTitleWidget extends StatelessWidget {
   final VoidCallback onFavorite;
 
   const DetailsTitleWidget({
-    Key? key,
+    super.key,
     required this.title,
     required this.isFavorite,
     required this.rating,
     required this.onFavorite,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
