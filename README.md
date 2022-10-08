@@ -6,6 +6,10 @@
 
 ![](.github/ecommerce.gif)
 
+Фильтрация:
+
+![](.github/ecommerce-filter.gif)
+
 Использованы пакеты:
 - flutter_bloc и equatable (состояние экранов)
 - flutter_svg (картинки из макета выгружены в svg)
