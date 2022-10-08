@@ -1,5 +1,6 @@
 import 'package:ecommerce_test/ui/pages/cart/models/cart_item_model.dart';
 import 'package:ecommerce_test/ui/resources/app_colors.dart';
+import 'package:ecommerce_test/ui/resources/app_images.dart';
 import 'package:ecommerce_test/ui/resources/app_text_style.dart';
 import 'package:flutter/material.dart';
 
@@ -28,6 +29,14 @@ class CartItemWidget extends StatelessWidget {
             fit: BoxFit.fitHeight,
             width: 88,
             height: 88,
+            errorBuilder: (_, __, ___) {
+              return Image.asset(
+                AppImages.mobileNotLoad,
+                width: 88,
+                height: 88,
+                fit: BoxFit.contain,
+              );
+            },
           ),
         ),
         const SizedBox(width: 16),

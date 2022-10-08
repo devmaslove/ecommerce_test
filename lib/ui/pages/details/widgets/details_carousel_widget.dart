@@ -1,5 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:ecommerce_test/ui/resources/app_colors.dart';
+import 'package:ecommerce_test/ui/resources/app_images.dart';
 import 'package:flutter/material.dart';
 
 class DetailsCarouselWidget extends StatelessWidget {
@@ -31,6 +32,12 @@ class DetailsCarouselWidget extends StatelessWidget {
           child: Image.network(
             imagesLinks[index],
             fit: BoxFit.contain,
+            errorBuilder: (_, __, ___) {
+              return Image.asset(
+                AppImages.mobileNotLoad,
+                fit: BoxFit.contain,
+              );
+            },
           ),
         );
       },

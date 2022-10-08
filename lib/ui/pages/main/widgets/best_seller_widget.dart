@@ -43,6 +43,12 @@ class BestSellerWidget extends StatelessWidget {
             child: Image.network(
               picture,
               fit: BoxFit.fill,
+              errorBuilder: (_, __, ___) {
+                return Image.asset(
+                  AppImages.mobileNotLoad,
+                  fit: BoxFit.contain,
+                );
+              },
             ),
           ),
           Positioned(

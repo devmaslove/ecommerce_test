@@ -1,6 +1,8 @@
 class AppImages {
   AppImages._();
 
+  static const mobileNotLoad = "assets/images/mobile-not-load.jpg";
+
   static const filter = "assets/svg/filter.svg";
   static const phones = "assets/svg/phones.svg";
   static const computer = "assets/svg/computer.svg";

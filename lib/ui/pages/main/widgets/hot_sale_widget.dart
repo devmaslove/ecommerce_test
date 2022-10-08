@@ -37,6 +37,9 @@ class HotSaleWidget extends StatelessWidget {
             child: Image.network(
               picture,
               fit: BoxFit.cover,
+              errorBuilder: (_, __, ___) {
+                return const SizedBox.shrink();
+              },
             ),
           ),
           if (onBuy != null)
