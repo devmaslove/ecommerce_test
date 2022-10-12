@@ -19,7 +19,7 @@ class CategoryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(12),
       clipBehavior: Clip.antiAlias,
       color: AppColors.background,
       child: InkWell(
@@ -30,15 +30,15 @@ class CategoryWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                width: 71,
-                height: 71,
+                width: 72,
+                height: 72,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: selected ? AppColors.accent : Colors.white,
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.shadow.withOpacity(0.15),
+                      color: AppColors.dark.withOpacity(0.1),
                       blurRadius: 20,
                     ),
                   ],
@@ -50,7 +50,7 @@ class CategoryWidget extends StatelessWidget {
                       selected ? Colors.white : AppColors.dark.withOpacity(0.3),
                 ),
               ),
-              const SizedBox(height: 7),
+              const SizedBox(height: 8),
               Text(
                 title,
                 style: const AppTextStyle().copyWith(

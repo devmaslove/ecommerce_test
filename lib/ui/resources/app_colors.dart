@@ -30,9 +30,6 @@ class AppColors {
   /// #B3B3B3
   static const greyDropDownIcon = Color(0xFFB3B3B3);
 
-  /// #A7ABC9 (167, 171, 201)
-  static const shadow = Color(0xFFE5E5E5);
-
   /// #AAB6D3 (170, 182, 211)
   static const shadowCard = Color(0xFFAAB6D3);
 
