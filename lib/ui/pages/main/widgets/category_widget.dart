@@ -1,23 +1,18 @@
 import 'package:ecommerce_test/ui/resources/app_colors.dart';
 import 'package:ecommerce_test/ui/resources/app_text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CategoryWidget extends StatelessWidget {
   final String title;
   final bool selected;
-  final String? imageAssetName;
-  final double? imageWidth;
-  final double? imageHeight;
+  final IconData icon;
   final VoidCallback onPressed;
 
   const CategoryWidget({
     super.key,
     required this.title,
     required this.selected,
-    this.imageAssetName,
-    this.imageWidth,
-    this.imageHeight,
+    required this.icon,
     required this.onPressed,
   });
 
@@ -48,18 +43,12 @@ class CategoryWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: imageAssetName != null &&
-                        imageWidth != null &&
-                        imageHeight != null
-                    ? SvgPicture.asset(
-                        imageAssetName!,
-                        width: imageWidth!,
-                        height: imageHeight!,
-                        color: selected
-                            ? Colors.white
-                            : AppColors.dark.withOpacity(0.3),
-                      )
-                    : null,
+                child: Icon(
+                  icon,
+                  size: 32,
+                  color:
+                      selected ? Colors.white : AppColors.dark.withOpacity(0.3),
+                ),
               ),
               const SizedBox(height: 7),
               Text(

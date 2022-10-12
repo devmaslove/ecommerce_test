@@ -48,12 +48,16 @@ class MainPageLoaded extends StatelessWidget {
       body: SafeArea(
         child: ListView(
           children: [
-            ListCategoriesWidget(
-              selectedCategory: state.selectedCategory,
-              onSelectCategory: (category) {
-                final bloc = context.read<MainBloc>();
-                bloc.add(MainSelectCategoryEvent(category));
-              },
+            const SizedBox(height: 12),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: ListCategoriesWidget(
+                selectedCategory: state.selectedCategory,
+                onSelectCategory: (category) {
+                  final bloc = context.read<MainBloc>();
+                  bloc.add(MainSelectCategoryEvent(category));
+                },
+              ),
             ),
             ListHotSalesWidget(
               children: [
