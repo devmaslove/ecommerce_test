@@ -1,3 +1,4 @@
+import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:ecommerce_test/ui/pages/details/details_page.dart';
 import 'package:ecommerce_test/ui/pages/main/bloc/main_bloc.dart';
 import 'package:ecommerce_test/ui/pages/main/filter_options_bottom_sheet.dart';
@@ -68,10 +69,14 @@ class MainPageLoaded extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
-            ListTitleWidget(
-              title: 'Best Seller',
-              buttonText: 'Filter',
-              onPressed: () => showFilterOptionsBottomSheet(context),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: ListTitleWidget(
+                title: 'Best Seller',
+                buttonText: 'Filter',
+                buttonIcon: BootstrapIcons.funnel,
+                onPressed: () => showFilterOptionsBottomSheet(context),
+              ),
             ),
             const SizedBox(height: 12),
             ListBestSellersWidget(

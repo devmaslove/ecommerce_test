@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 class ListTitleWidget extends StatelessWidget {
   final String title;
   final String? buttonText;
+  final IconData? buttonIcon;
   final VoidCallback? onPressed;
 
   const ListTitleWidget({
     super.key,
     required this.title,
     this.buttonText,
+    this.buttonIcon,
     this.onPressed,
   });
 
@@ -19,7 +21,6 @@ class ListTitleWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const SizedBox(width: 17),
         Text(
           title,
           style: const AppTextStyle().copyWith(
@@ -28,24 +29,38 @@ class ListTitleWidget extends StatelessWidget {
           ),
         ),
         const Spacer(),
-        if (buttonText != null)
+        if (buttonText != null || buttonIcon != null)
           TextButton(
             onPressed: onPressed,
             style: TextButton.styleFrom(
               padding: const EdgeInsets.symmetric(
-                horizontal: 16,
+                horizontal: 12,
               ),
             ),
-            child: Text(
-              buttonText!,
-              style: const AppTextStyle().copyWith(
-                fontSize: 15,
-                fontWeight: FontWeight.w400,
-                color: AppColors.accent,
-              ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (buttonIcon != null)
+                  Icon(
+                    buttonIcon,
+                    size: 16,
+                    color: AppColors.accent,
+                  ),
+                if (buttonIcon != null && buttonText != null)
+                  const SizedBox(width: 4),
+                if (buttonText != null)
+                  Text(
+                    buttonText!,
+                    style: const AppTextStyle().copyWith(
+                      fontSize: 15,
+                      height: 16 / 15,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.accent,
+                    ),
+                  ),
+              ],
             ),
           ),
-        const SizedBox(width: 17),
       ],
     );
   }
