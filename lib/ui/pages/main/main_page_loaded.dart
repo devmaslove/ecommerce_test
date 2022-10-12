@@ -7,10 +7,8 @@ import 'package:ecommerce_test/ui/pages/main/widgets/list_best_sellers_widget.da
 import 'package:ecommerce_test/ui/pages/main/widgets/list_categories_widget.dart';
 import 'package:ecommerce_test/ui/pages/main/widgets/list_hot_sales_widget.dart';
 import 'package:ecommerce_test/ui/pages/main/widgets/list_title_widget.dart';
-import 'package:ecommerce_test/ui/resources/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class MainPageLoaded extends StatelessWidget {
   final MainLoaded state;
@@ -47,71 +45,55 @@ class MainPageLoaded extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            icon: SvgPicture.asset(
-              AppImages.filter,
-              width: 11,
-              height: 13,
+      body: SafeArea(
+        child: ListView(
+          children: [
+            ListCategoriesWidget(
+              selectedCategory: state.selectedCategory,
+              onSelectCategory: (category) {
+                final bloc = context.read<MainBloc>();
+                bloc.add(MainSelectCategoryEvent(category));
+              },
             ),
-            tooltip: 'Open filter',
-            onPressed: () => showFilterOptionsBottomSheet(context),
-          ),
-          const SizedBox(width: 17),
-        ],
-      ),
-      body: ListView(
-        children: [
-          ListTitleWidget(
-            title: 'Select Category',
-            buttonText: 'view all',
-            onPressed: () {},
-          ),
-          ListCategoriesWidget(
-            selectedCategory: state.selectedCategory,
-            onSelectCategory: (category) {
-              final bloc = context.read<MainBloc>();
-              bloc.add(MainSelectCategoryEvent(category));
-            },
-          ),
-          ListHotSalesWidget(
-            children: [
-              ...state.itemsHome
-                  .map(
-                    (item) => HotSaleWidget(
-                      title: item.title,
-                      onBuy: item.isBuy ? () => gotoDetailsPage(context) : null,
-                      isNew: item.isNew,
-                      subtitle: item.subtitle,
-                      picture: item.picture,
-                    ),
-                  )
-                  .toList(),
-            ],
-          ),
-          ListTitleWidget(
-            title: 'Best Seller',
-            buttonText: 'see more',
-            onPressed: () {},
-          ),
-          ListBestSellersWidget(
-            children: [
-              ...state.itemsBest
-                  .map(
-                    (item) => BestSellerWidget(
-                      picture: item.picture,
-                      isFavorite: item.isFavorites,
-                      title: item.title,
-                      discountPrice: item.priceWithDiscount,
-                      price: item.price,
-                      onTap: () => gotoDetailsPage(context),
-                    ),
-                  )
-                  .toList(),
-            ],
-          ),
-        ],
+            ListHotSalesWidget(
+              children: [
+                ...state.itemsHome
+                    .map(
+                      (item) => HotSaleWidget(
+                        title: item.title,
+                        onBuy:
+                            item.isBuy ? () => gotoDetailsPage(context) : null,
+                        isNew: item.isNew,
+                        subtitle: item.subtitle,
+                        picture: item.picture,
+                      ),
+                    )
+                    .toList(),
+              ],
+            ),
+            ListTitleWidget(
+              title: 'Best Seller',
+              buttonText: 'Filter',
+              onPressed: () => showFilterOptionsBottomSheet(context),
+            ),
+            ListBestSellersWidget(
+              children: [
+                ...state.itemsBest
+                    .map(
+                      (item) => BestSellerWidget(
+                        picture: item.picture,
+                        isFavorite: item.isFavorites,
+                        title: item.title,
+                        discountPrice: item.priceWithDiscount,
+                        price: item.price,
+                        onTap: () => gotoDetailsPage(context),
+                      ),
+                    )
+                    .toList(),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

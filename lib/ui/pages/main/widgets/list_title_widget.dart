@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 
 class ListTitleWidget extends StatelessWidget {
   final String title;
-  final String buttonText;
-  final VoidCallback onPressed;
+  final String? buttonText;
+  final VoidCallback? onPressed;
 
   const ListTitleWidget({
     super.key,
     required this.title,
-    required this.buttonText,
-    required this.onPressed,
+    this.buttonText,
+    this.onPressed,
   });
 
   @override
@@ -28,22 +28,23 @@ class ListTitleWidget extends StatelessWidget {
           ),
         ),
         const Spacer(),
-        TextButton(
-          onPressed: onPressed,
-          style: TextButton.styleFrom(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
+        if (buttonText != null)
+          TextButton(
+            onPressed: onPressed,
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+              ),
+            ),
+            child: Text(
+              buttonText!,
+              style: const AppTextStyle().copyWith(
+                fontSize: 15,
+                fontWeight: FontWeight.w400,
+                color: AppColors.accent,
+              ),
             ),
           ),
-          child: Text(
-            buttonText,
-            style: const AppTextStyle().copyWith(
-              fontSize: 15,
-              fontWeight: FontWeight.w400,
-              color: AppColors.accent,
-            ),
-          ),
-        ),
         const SizedBox(width: 17),
       ],
     );
