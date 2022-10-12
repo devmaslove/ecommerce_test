@@ -5,6 +5,7 @@ import 'package:ecommerce_test/ui/pages/main/models/main_best_item_model.dart';
 import 'package:ecommerce_test/ui/pages/main/models/main_home_item_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 part 'main_event.dart';
 part 'main_state.dart';
@@ -23,13 +24,20 @@ class MainBloc extends Bloc<MainEvent, MainState> {
                   (e) {
                     final priceWithoutDiscount = e.priceWithoutDiscount ?? 0;
                     final discountPrice = e.discountPrice ?? 0;
+                    final price = max<int>(
+                      discountPrice,
+                      priceWithoutDiscount,
+                    );
+                    final priceWithDiscount = min<int>(
+                      discountPrice,
+                      priceWithoutDiscount,
+                    );
                     return MainBestItemModel(
                       picture: e.picture ?? '',
                       title: e.title ?? '',
-                      price: max<int>(discountPrice, priceWithoutDiscount),
+                      price: _formatPrice(price),
                       isFavorites: e.isFavorites ?? false,
-                      priceWithDiscount:
-                          min<int>(discountPrice, priceWithoutDiscount),
+                      priceWithDiscount: _formatPrice(priceWithDiscount),
                     );
                   },
                 ).toList() ??
@@ -64,5 +72,10 @@ class MainBloc extends Bloc<MainEvent, MainState> {
         );
       }
     });
+  }
+
+  String _formatPrice(final int price) {
+    final oCcy = NumberFormat("\$#,##0", "en_US");
+    return oCcy.format(price);
   }
 }

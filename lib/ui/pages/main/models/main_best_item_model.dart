@@ -4,8 +4,8 @@ class MainBestItemModel extends Equatable {
   final bool isFavorites;
   final String title;
   final String picture;
-  final int price;
-  final int priceWithDiscount;
+  final String price;
+  final String priceWithDiscount;
 
   const MainBestItemModel({
     required this.isFavorites,

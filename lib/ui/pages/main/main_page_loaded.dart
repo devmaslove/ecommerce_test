@@ -2,7 +2,6 @@ import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:ecommerce_test/ui/pages/details/details_page.dart';
 import 'package:ecommerce_test/ui/pages/main/bloc/main_bloc.dart';
 import 'package:ecommerce_test/ui/pages/main/filter_options_bottom_sheet.dart';
-import 'package:ecommerce_test/ui/pages/main/widgets/best_seller_widget.dart';
 import 'package:ecommerce_test/ui/pages/main/widgets/list_best_sellers_widget.dart';
 import 'package:ecommerce_test/ui/pages/main/widgets/list_categories_widget.dart';
 import 'package:ecommerce_test/ui/pages/main/widgets/list_hot_sales_widget.dart';
@@ -68,7 +67,7 @@ class MainPageLoaded extends StatelessWidget {
                 onBuy: (_) => gotoDetailsPage(context),
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: ListTitleWidget(
@@ -79,22 +78,14 @@ class MainPageLoaded extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
-            ListBestSellersWidget(
-              children: [
-                ...state.itemsBest
-                    .map(
-                      (item) => BestSellerWidget(
-                        picture: item.picture,
-                        isFavorite: item.isFavorites,
-                        title: item.title,
-                        discountPrice: item.priceWithDiscount,
-                        price: item.price,
-                        onTap: () => gotoDetailsPage(context),
-                      ),
-                    )
-                    .toList(),
-              ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: ListBestSellersWidget(
+                items: state.itemsBest,
+                onBuy: (_) => gotoDetailsPage(context),
+              ),
             ),
+            const SizedBox(height: 12),
           ],
         ),
       ),
