@@ -8,9 +8,11 @@ class HotSaleWidget extends StatelessWidget {
   final String picture;
   final bool isNew;
   final VoidCallback? onBuy;
+  final double height;
 
   const HotSaleWidget({
     super.key,
+    required this.height,
     required this.title,
     required this.subtitle,
     required this.picture,
@@ -21,42 +23,58 @@ class HotSaleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 182,
+      height: height,
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: AppColors.backgroundDark,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Stack(
+        fit: StackFit.expand,
         children: [
-          Positioned(
-            left: 98,
-            top: -10,
-            height: 221,
-            width: 384,
+          Positioned.fill(
+            left: 100,
+            right: -100,
+            top: -8,
+            bottom: -32,
             child: Image.network(
               picture,
-              fit: BoxFit.cover,
+              alignment: Alignment.centerRight,
+              fit: BoxFit.fitHeight,
               errorBuilder: (_, __, ___) {
                 return const SizedBox.shrink();
               },
             ),
           ),
+          const DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.black,
+                  Colors.black87,
+                  Colors.black26,
+                  Colors.transparent,
+                ],
+                stops: [0.0, 0.4, 0.6, 1.0],
+              ),
+            ),
+          ),
           if (onBuy != null)
             Positioned(
-              left: 25,
-              bottom: 26,
+              left: 24,
+              bottom: 24,
+              height: 28,
               child: ElevatedButton(
                 onPressed: onBuy,
                 style: ElevatedButton.styleFrom(
                   primary: Colors.white,
                   elevation: 0,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4),
                   ),
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 27,
-                    vertical: 5,
+                    horizontal: 24,
+                    vertical: 0,
                   ),
                 ),
                 child: Text(
@@ -70,41 +88,56 @@ class HotSaleWidget extends StatelessWidget {
                 ),
               ),
             ),
-          Positioned(
-            left: 25,
-            bottom: 75,
-            child: Text(
-              subtitle,
-              style: const AppTextStyle().copyWith(
-                fontFamily: 'SF Pro Display',
-                fontSize: 11,
-                height: 13 / 11,
-                fontWeight: FontWeight.w400,
-                color: Colors.white,
-              ),
-            ),
-          ),
-          Positioned(
-            left: 25,
-            bottom: 93,
-            child: Text(
-              title,
-              style: const AppTextStyle().copyWith(
-                fontFamily: 'SF Pro Display',
-                fontSize: 25,
-                height: 30 / 25,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
+          Positioned.fill(
+            left: 24,
+            top: 48,
+            bottom: 56,
+            child: FractionallySizedBox(
+              alignment: Alignment.centerLeft,
+              widthFactor: 0.5,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Spacer(),
+                  FittedBox(
+                    child: Text(
+                      title,
+                      style: const AppTextStyle().copyWith(
+                        fontFamily: 'SF Pro Display',
+                        fontSize: 25,
+                        height: 30 / 25,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                      ),
+                      maxLines: 1,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  FittedBox(
+                    child: Text(
+                      subtitle,
+                      style: const AppTextStyle().copyWith(
+                        fontFamily: 'SF Pro Display',
+                        fontSize: 11,
+                        height: 13 / 11,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white,
+                      ),
+                      maxLines: 1,
+                    ),
+                  ),
+                  const Spacer(),
+                ],
               ),
             ),
           ),
           if (isNew)
             Positioned(
-              left: 25,
-              top: 14,
+              left: 24,
+              top: 24,
               child: Container(
-                width: 27,
-                height: 27,
+                width: 28,
+                height: 28,
                 alignment: Alignment.center,
                 decoration: const BoxDecoration(
                   color: AppColors.accent,

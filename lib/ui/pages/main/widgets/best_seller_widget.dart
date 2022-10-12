@@ -30,7 +30,7 @@ class BestSellerWidget extends StatelessWidget {
       color: Colors.white,
       shadowColor: AppColors.shadowCard.withOpacity(0.1),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(12),
       ),
       clipBehavior: Clip.antiAlias,
       child: Stack(

@@ -2,7 +2,6 @@ import 'package:ecommerce_test/ui/pages/details/details_page.dart';
 import 'package:ecommerce_test/ui/pages/main/bloc/main_bloc.dart';
 import 'package:ecommerce_test/ui/pages/main/filter_options_bottom_sheet.dart';
 import 'package:ecommerce_test/ui/pages/main/widgets/best_seller_widget.dart';
-import 'package:ecommerce_test/ui/pages/main/widgets/hot_sale_widget.dart';
 import 'package:ecommerce_test/ui/pages/main/widgets/list_best_sellers_widget.dart';
 import 'package:ecommerce_test/ui/pages/main/widgets/list_categories_widget.dart';
 import 'package:ecommerce_test/ui/pages/main/widgets/list_hot_sales_widget.dart';
@@ -63,21 +62,9 @@ class MainPageLoaded extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: ListHotSalesWidget(
-                children: [
-                  ...state.itemsHome
-                      .map(
-                        (item) => HotSaleWidget(
-                          title: item.title,
-                          onBuy: item.isBuy
-                              ? () => gotoDetailsPage(context)
-                              : null,
-                          isNew: item.isNew,
-                          subtitle: item.subtitle,
-                          picture: item.picture,
-                        ),
-                      )
-                      .toList(),
-                ],
+                height: 180,
+                items: state.itemsHome,
+                onBuy: (_) => gotoDetailsPage(context),
               ),
             ),
             const SizedBox(height: 12),
