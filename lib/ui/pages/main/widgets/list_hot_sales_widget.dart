@@ -10,13 +10,7 @@ class ListHotSalesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(
-        left: 15,
-        right: 21,
-        top: 8,
-        bottom: 11,
-      ),
+    return SizedBox(
       height: 182,
       child: PageView(children: children),
     );

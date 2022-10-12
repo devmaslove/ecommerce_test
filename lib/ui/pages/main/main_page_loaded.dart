@@ -59,27 +59,34 @@ class MainPageLoaded extends StatelessWidget {
                 },
               ),
             ),
-            ListHotSalesWidget(
-              children: [
-                ...state.itemsHome
-                    .map(
-                      (item) => HotSaleWidget(
-                        title: item.title,
-                        onBuy:
-                            item.isBuy ? () => gotoDetailsPage(context) : null,
-                        isNew: item.isNew,
-                        subtitle: item.subtitle,
-                        picture: item.picture,
-                      ),
-                    )
-                    .toList(),
-              ],
+            const SizedBox(height: 12),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: ListHotSalesWidget(
+                children: [
+                  ...state.itemsHome
+                      .map(
+                        (item) => HotSaleWidget(
+                          title: item.title,
+                          onBuy: item.isBuy
+                              ? () => gotoDetailsPage(context)
+                              : null,
+                          isNew: item.isNew,
+                          subtitle: item.subtitle,
+                          picture: item.picture,
+                        ),
+                      )
+                      .toList(),
+                ],
+              ),
             ),
+            const SizedBox(height: 12),
             ListTitleWidget(
               title: 'Best Seller',
               buttonText: 'Filter',
               onPressed: () => showFilterOptionsBottomSheet(context),
             ),
+            const SizedBox(height: 12),
             ListBestSellersWidget(
               children: [
                 ...state.itemsBest
