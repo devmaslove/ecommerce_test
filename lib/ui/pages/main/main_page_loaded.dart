@@ -57,15 +57,12 @@ class MainPageLoaded extends StatelessWidget {
         child: ListView(
           children: [
             const SizedBox(height: 12),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: ListCategoriesWidget(
-                selectedCategory: state.selectedCategory,
-                onSelectCategory: (category) {
-                  final bloc = context.read<MainBloc>();
-                  bloc.add(MainSelectCategoryEvent(category));
-                },
-              ),
+            ListCategoriesWidget(
+              selectedCategory: state.selectedCategory,
+              onSelectCategory: (category) {
+                final bloc = context.read<MainBloc>();
+                bloc.add(MainSelectCategoryEvent(category));
+              },
             ),
             const SizedBox(height: 12),
             if (state.itemsHome.isNotEmpty)

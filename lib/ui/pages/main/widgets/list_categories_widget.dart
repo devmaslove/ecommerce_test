@@ -18,6 +18,7 @@ class ListCategoriesWidget extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: [
+          const SizedBox(width: 16),
           CategoryWidget(
             title: 'Phones',
             selected: selectedCategory == 'Phones',
@@ -48,6 +49,7 @@ class ListCategoriesWidget extends StatelessWidget {
             icon: BootstrapIcons.gift,
             onPressed: () => onSelectCategory('Other'),
           ),
+          const SizedBox(width: 16),
         ],
       ),
     );
