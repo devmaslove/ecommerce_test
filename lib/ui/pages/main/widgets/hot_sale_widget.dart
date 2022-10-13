@@ -104,8 +104,8 @@ class HotSaleWidget extends StatelessWidget {
                       title,
                       style: const AppTextStyle().copyWith(
                         fontFamily: 'SF Pro Display',
-                        fontSize: 25,
-                        height: 30 / 25,
+                        fontSize: 24,
+                        height: 30 / 24,
                         fontWeight: FontWeight.w700,
                         color: Colors.white,
                       ),

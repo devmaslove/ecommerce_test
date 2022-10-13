@@ -24,7 +24,7 @@ class MainPageLoaded extends StatelessWidget {
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
-          top: Radius.circular(30),
+          top: Radius.circular(24),
         ),
       ),
       builder: (context) {

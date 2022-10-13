@@ -30,6 +30,7 @@ class _SelectDropdownWidgetState extends State<SelectDropdownWidget> {
     return DropdownButtonHideUnderline(
       child: Container(
         height: 37,
+        width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 14),
         decoration: BoxDecoration(
           color: Colors.white,

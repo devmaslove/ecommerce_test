@@ -202,8 +202,8 @@ class DetailsContentLoaded extends StatelessWidget {
                   'Select color and capacity',
                   style: const AppTextStyle().copyWith(
                     fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                    height: 20 / 16,
+                    fontSize: 15,
+                    height: 20 / 15,
                   ),
                 ),
               ),

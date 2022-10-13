@@ -67,7 +67,7 @@ class _CapacityWidget extends StatelessWidget {
               textAlign: TextAlign.center,
               style: const AppTextStyle().copyWith(
                 color: selected ? Colors.white : AppColors.greyCapacity,
-                fontSize: 13,
+                fontSize: 15,
                 fontWeight: FontWeight.w700,
               ),
             ),

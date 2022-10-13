@@ -24,7 +24,7 @@ class ListTitleWidget extends StatelessWidget {
         Text(
           title,
           style: const AppTextStyle().copyWith(
-            fontSize: 25,
+            fontSize: 24,
             fontWeight: FontWeight.w700,
           ),
         ),

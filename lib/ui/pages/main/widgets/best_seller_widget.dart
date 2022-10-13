@@ -83,7 +83,7 @@ class BestSellerWidget extends StatelessWidget {
                     Text(
                       discountPrice,
                       style: const AppTextStyle().copyWith(
-                        fontSize: 16,
+                        fontSize: 15,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -91,7 +91,7 @@ class BestSellerWidget extends StatelessWidget {
                     Text(
                       price,
                       style: const AppTextStyle().copyWith(
-                        fontSize: 10,
+                        fontSize: 11,
                         fontWeight: FontWeight.w500,
                         color: AppColors.dark.withOpacity(0.3),
                         decoration: TextDecoration.lineThrough,
@@ -103,7 +103,7 @@ class BestSellerWidget extends StatelessWidget {
                 Text(
                   title,
                   style: const AppTextStyle().copyWith(
-                    fontSize: 10,
+                    fontSize: 11,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
