@@ -17,6 +17,7 @@ class ListCategoriesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      key: const PageStorageKey<String>('Categories'),
       scrollDirection: Axis.horizontal,
       child: Padding(
         padding: padding,

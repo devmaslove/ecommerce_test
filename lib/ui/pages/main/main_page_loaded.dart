@@ -58,6 +58,7 @@ class MainPageLoaded extends StatelessWidget {
           children: [
             const SizedBox(height: 12),
             ListCategoriesWidget(
+              key: const Key('Categories'),
               padding: const EdgeInsets.symmetric(horizontal: 16),
               selectedCategory: state.selectedCategory,
               onSelectCategory: (category) {

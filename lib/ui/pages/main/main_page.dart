@@ -1,4 +1,5 @@
 import 'package:ecommerce_test/ui/pages/main/bloc/main_bloc.dart';
+import 'package:ecommerce_test/ui/pages/main/main_page_category_loading.dart';
 import 'package:ecommerce_test/ui/pages/main/main_page_load_error.dart';
 import 'package:ecommerce_test/ui/pages/main/main_page_loaded.dart';
 import 'package:ecommerce_test/ui/pages/main/main_page_loading.dart';
@@ -27,11 +28,21 @@ class MainPageContent extends StatelessWidget {
         if (state is MainLoading) {
           return const MainPageLoading();
         }
+        if (state is MainCategoryLoading) {
+          return MainPageCategoryLoading(
+            selectedCategory: state.selectedCategory,
+          );
+        }
         if (state is MainErrorNetwork) {
           return MainPageLoadError(
+            selectedCategory: state.selectedCategory,
             onRetry: () {
               final bloc = context.read<MainBloc>();
-              bloc.add(const MainLoadEvent());
+              bloc.add(MainSelectCategoryEvent(state.selectedCategory));
+            },
+            onSelectCategory: (category) {
+              final bloc = context.read<MainBloc>();
+              bloc.add(MainSelectCategoryEvent(category));
             },
           );
         }

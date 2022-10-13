@@ -14,9 +14,26 @@ class MainLoading extends MainState {
   List<Object> get props => [];
 }
 
-class MainErrorNetwork extends MainState {
+class MainCategoryLoading extends MainState {
+  final String selectedCategory;
+
+  const MainCategoryLoading({
+    required this.selectedCategory,
+  });
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [selectedCategory];
+}
+
+class MainErrorNetwork extends MainState {
+  final String selectedCategory;
+
+  const MainErrorNetwork({
+    required this.selectedCategory,
+  });
+
+  @override
+  List<Object> get props => [selectedCategory];
 }
 
 class MainLoaded extends MainState {
