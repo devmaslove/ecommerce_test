@@ -20,16 +20,34 @@ class MainErrorNetwork extends MainState {
 }
 
 class MainLoaded extends MainState {
+  final MainFilterItemsModel selectedFilter;
   final String selectedCategory;
   final List<MainHomeItemModel> itemsHome;
   final List<MainBestItemModel> itemsBest;
 
   const MainLoaded({
     required this.selectedCategory,
+    required this.selectedFilter,
     required this.itemsHome,
     required this.itemsBest,
   });
 
+  List<MainBestItemModel> get itemsBestFiltered {
+    return itemsBest.where((item) {
+      if (!selectedFilter.isFilterSet) return true;
+      if (item.priceForFilter < selectedFilter.priceBottom ||
+          item.priceForFilter > selectedFilter.priceTop) {
+        return false;
+      }
+      return item.title.contains(selectedFilter.brand);
+    }).toList();
+  }
+
   @override
-  List<Object> get props => [selectedCategory, itemsHome, itemsBest];
+  List<Object> get props => [
+        selectedCategory,
+        selectedFilter,
+        itemsHome,
+        itemsBest,
+      ];
 }

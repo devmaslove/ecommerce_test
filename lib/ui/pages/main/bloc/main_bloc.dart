@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:ecommerce_test/data/data_provider.dart';
 import 'package:ecommerce_test/ui/pages/main/models/main_best_item_model.dart';
+import 'package:ecommerce_test/ui/pages/main/models/main_filter_items_model.dart';
 import 'package:ecommerce_test/ui/pages/main/models/main_home_item_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +20,7 @@ class MainBloc extends Bloc<MainEvent, MainState> {
         final mainData = await DataProvider().getMain();
         emit(
           MainLoaded(
+            selectedFilter: const MainFilterItemsModel(),
             selectedCategory: 'Phones',
             itemsBest: mainData.bestSeller?.map(
                   (e) {
@@ -38,6 +40,7 @@ class MainBloc extends Bloc<MainEvent, MainState> {
                       price: _formatPrice(price),
                       isFavorites: e.isFavorites ?? false,
                       priceWithDiscount: _formatPrice(priceWithDiscount),
+                      priceForFilter: priceWithDiscount,
                     );
                   },
                 ).toList() ??
@@ -68,6 +71,20 @@ class MainBloc extends Bloc<MainEvent, MainState> {
             itemsHome: [...loadedState.itemsHome],
             itemsBest: [...loadedState.itemsBest],
             selectedCategory: event.category,
+            selectedFilter: loadedState.selectedFilter,
+          ),
+        );
+      }
+    });
+    on<MainSetFilterEvent>((event, emit) async {
+      if (state is MainLoaded) {
+        final loadedState = state as MainLoaded;
+        emit(
+          MainLoaded(
+            itemsHome: [...loadedState.itemsHome],
+            itemsBest: [...loadedState.itemsBest],
+            selectedCategory: loadedState.selectedCategory,
+            selectedFilter: event.filter,
           ),
         );
       }

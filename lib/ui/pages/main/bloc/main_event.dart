@@ -19,3 +19,12 @@ class MainSelectCategoryEvent extends MainEvent {
   @override
   List<Object> get props => [category];
 }
+
+class MainSetFilterEvent extends MainEvent {
+  final MainFilterItemsModel filter;
+
+  const MainSetFilterEvent(this.filter);
+
+  @override
+  List<Object> get props => [filter];
+}

@@ -1,10 +1,30 @@
+import 'package:ecommerce_test/ui/pages/main/models/main_filter_items_model.dart';
 import 'package:ecommerce_test/ui/pages/main/widgets/select_dropdown_widget.dart';
 import 'package:ecommerce_test/ui/resources/app_colors.dart';
 import 'package:ecommerce_test/ui/resources/app_text_style.dart';
 import 'package:flutter/material.dart';
 
-class FilterOptionsBottomSheet extends StatelessWidget {
-  const FilterOptionsBottomSheet({super.key});
+class FilterOptionsBottomSheet extends StatefulWidget {
+  final MainFilterItemsModel selected;
+
+  const FilterOptionsBottomSheet({
+    super.key,
+    required this.selected,
+  });
+
+  @override
+  State<FilterOptionsBottomSheet> createState() =>
+      _FilterOptionsBottomSheetState();
+}
+
+class _FilterOptionsBottomSheetState extends State<FilterOptionsBottomSheet> {
+  late MainFilterItemsModel currentSelection;
+
+  @override
+  void initState() {
+    currentSelection = widget.selected.copyWith();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +65,17 @@ class FilterOptionsBottomSheet extends StatelessWidget {
               color: AppColors.dark,
             ),
           ),
-          const SizedBox(height: 10),
-          const SelectDropdownWidget(
-            values: ['Samsung', 'Xiaomi', 'Motorola', 'Apple'],
+          const SizedBox(height: 12),
+          SelectDropdownWidget(
+            values: const ['Samsung', 'Xiaomi', 'Motorola', 'Apple'],
+            selected: currentSelection.brand,
+            onChange: (value) {
+              setState(() {
+                currentSelection = currentSelection.copyWith(
+                  brand: value,
+                );
+              });
+            },
           ),
           const SizedBox(height: 12),
           Text(
@@ -59,13 +87,26 @@ class FilterOptionsBottomSheet extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          const SelectDropdownWidget(
-            values: [
+          SelectDropdownWidget(
+            values: const [
               '\$300 - \$500',
               '\$500 - \$1000',
               '\$1000 - \$5000',
               '\$5000 - \$10000'
             ],
+            selected: currentSelection.price,
+            onChange: (value) {
+              final prices = value
+                  .split(' - ')
+                  .map((price) => int.parse(price.replaceAll('\$', '')))
+                  .toList();
+              setState(() {
+                currentSelection = currentSelection.copyWith(
+                  priceBottom: prices[0],
+                  priceTop: prices[1],
+                );
+              });
+            },
           ),
           const SizedBox(height: 32),
           Row(
@@ -74,7 +115,9 @@ class FilterOptionsBottomSheet extends StatelessWidget {
                 child: SizedBox(
                   height: 40,
                   child: TextButton(
-                    onPressed: () => Navigator.of(context).pop(),
+                    onPressed: () {
+                      Navigator.of(context).pop(const MainFilterItemsModel());
+                    },
                     style: TextButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 12,
@@ -95,7 +138,9 @@ class FilterOptionsBottomSheet extends StatelessWidget {
                 child: SizedBox(
                   height: 40,
                   child: TextButton(
-                    onPressed: () => Navigator.of(context).pop(),
+                    onPressed: () {
+                      Navigator.of(context).pop(currentSelection.copyWith());
+                    },
                     style: TextButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 12,

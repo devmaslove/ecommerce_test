@@ -24,12 +24,6 @@ class AppColors {
   /// #8D8D8D
   static const greyCapacity = Color(0xFF8D8D8D);
 
-  /// #DCDCDC
-  static const greyBorder = Color(0xFFDCDCDC);
-
-  /// #B3B3B3
-  static const greyDropDownIcon = Color(0xFFB3B3B3);
-
   /// #4C5F8F (76, 95, 143)
   static const shadowDetails = Color(0xFF4C5F8F);
 

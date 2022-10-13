@@ -1,71 +1,58 @@
+import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:ecommerce_test/ui/resources/app_colors.dart';
-import 'package:ecommerce_test/ui/resources/app_images.dart';
 import 'package:ecommerce_test/ui/resources/app_text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
-class SelectDropdownWidget extends StatefulWidget {
+class SelectDropdownWidget extends StatelessWidget {
+  final String selected;
   final List<String> values;
+  final ValueChanged<String> onChange;
 
   const SelectDropdownWidget({
     super.key,
     required this.values,
+    required this.selected,
+    required this.onChange,
   });
-
-  @override
-  State<SelectDropdownWidget> createState() => _SelectDropdownWidgetState();
-}
-
-class _SelectDropdownWidgetState extends State<SelectDropdownWidget> {
-  String? selectedValue;
-
-  @override
-  void initState() {
-    super.initState();
-    selectedValue = widget.values.isNotEmpty ? widget.values[0] : null;
-  }
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonHideUnderline(
       child: Container(
-        height: 37,
+        height: 36,
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 14),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(
           color: Colors.white,
-          border: Border.all(color: AppColors.greyBorder),
-          borderRadius: BorderRadius.circular(5),
+          border: Border.all(color: AppColors.dark.withOpacity(0.1)),
+          borderRadius: BorderRadius.circular(4),
         ),
         child: DropdownButton<String>(
-          value: selectedValue,
-          hint: selectedValue != null
-              ? Text(
-                  selectedValue!,
-                  style: const AppTextStyle().copyWith(
-                    fontSize: 18,
-                    color: AppColors.dark,
-                    fontWeight: FontWeight.w400,
-                  ),
-                )
-              : null,
+          value: selected.isNotEmpty ? selected : null,
+          hint: Text(
+            selected,
+            style: const AppTextStyle().copyWith(
+              fontSize: 18,
+              color: AppColors.dark,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
           style: const AppTextStyle().copyWith(
             fontSize: 18,
             color: AppColors.dark,
             fontWeight: FontWeight.w400,
           ),
-          iconDisabledColor: AppColors.greyDropDownIcon,
-          iconEnabledColor: AppColors.greyDropDownIcon,
+          iconDisabledColor: AppColors.dark.withOpacity(0.3),
+          iconEnabledColor: AppColors.dark.withOpacity(0.3),
           isExpanded: true,
           isDense: true,
-          onChanged: (value) => setState(() => selectedValue = value),
+          onChanged: (value) => onChange(value ?? ''),
           items: buildItems(),
-          borderRadius: BorderRadius.circular(5),
-          icon: SvgPicture.asset(
-            AppImages.dropDown,
-            width: 16,
-            height: 8,
-            color: AppColors.greyDropDownIcon,
+          borderRadius: BorderRadius.circular(4),
+          icon: Icon(
+            BootstrapIcons.chevron_down,
+            size: 16,
+            color: AppColors.dark.withOpacity(0.3),
           ),
         ),
       ),
@@ -73,12 +60,14 @@ class _SelectDropdownWidgetState extends State<SelectDropdownWidget> {
   }
 
   List<DropdownMenuItem<String>>? buildItems() {
-    if (widget.values.length < 2) return null;
-    return widget.values
-        .map((value) => DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-            ))
+    if (values.length < 2) return null;
+    return values
+        .map(
+          (value) => DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          ),
+        )
         .toList();
   }
 }

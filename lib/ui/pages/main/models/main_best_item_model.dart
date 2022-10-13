@@ -6,6 +6,7 @@ class MainBestItemModel extends Equatable {
   final String picture;
   final String price;
   final String priceWithDiscount;
+  final int priceForFilter;
 
   const MainBestItemModel({
     required this.isFavorites,
@@ -13,6 +14,7 @@ class MainBestItemModel extends Equatable {
     required this.picture,
     required this.price,
     required this.priceWithDiscount,
+    required this.priceForFilter,
   });
 
   @override
@@ -22,5 +24,6 @@ class MainBestItemModel extends Equatable {
         picture,
         price,
         priceWithDiscount,
+        priceForFilter,
       ];
 }
