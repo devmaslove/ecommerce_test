@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:ecommerce_test/data/data_provider.dart';
 import 'package:ecommerce_test/ui/pages/main/models/main_best_item_model.dart';
 import 'package:ecommerce_test/ui/pages/main/models/main_filter_items_model.dart';
@@ -20,15 +21,18 @@ class MainBloc extends Bloc<MainEvent, MainState> {
       await Future.delayed(const Duration(milliseconds: 2500));
       await _tryLoadCategory(emit: emit, category: _defaultCategory);
     });
-    on<MainSelectCategoryEvent>((event, emit) async {
-      emit(MainCategoryLoading(selectedCategory: event.category));
-      if (event.category == _defaultCategory) {
-        await _tryLoadCategory(emit: emit, category: _defaultCategory);
-      } else {
-        await Future.delayed(const Duration(milliseconds: 1000));
-        emit(MainErrorNetwork(selectedCategory: event.category));
-      }
-    });
+    on<MainSelectCategoryEvent>(
+      (event, emit) async {
+        emit(MainCategoryLoading(selectedCategory: event.category));
+        if (event.category == _defaultCategory) {
+          await _tryLoadCategory(emit: emit, category: _defaultCategory);
+        } else {
+          await Future.delayed(const Duration(milliseconds: 1000));
+          emit(MainErrorNetwork(selectedCategory: event.category));
+        }
+      },
+      transformer: restartable(),
+    );
     on<MainSetFilterEvent>((event, emit) async {
       if (state is MainLoaded) {
         final loadedState = state as MainLoaded;
