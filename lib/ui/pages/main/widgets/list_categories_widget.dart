@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class ListCategoriesWidget extends StatelessWidget {
   final String selectedCategory;
-  final ValueChanged<String> onSelectCategory;
+  final ValueChanged<String>? onSelectCategory;
   final EdgeInsetsGeometry padding;
 
   const ListCategoriesWidget({
@@ -27,31 +27,41 @@ class ListCategoriesWidget extends StatelessWidget {
               title: 'Phones',
               selected: selectedCategory == 'Phones',
               icon: BootstrapIcons.phone,
-              onPressed: () => onSelectCategory('Phones'),
+              onPressed: onSelectCategory != null
+                  ? () => onSelectCategory!('Phones')
+                  : null,
             ),
             CategoryWidget(
               title: 'Computer',
               selected: selectedCategory == 'Computer',
               icon: BootstrapIcons.pc_display,
-              onPressed: () => onSelectCategory('Computer'),
+              onPressed: onSelectCategory != null
+                  ? () => onSelectCategory!('Computer')
+                  : null,
             ),
             CategoryWidget(
               title: 'Health',
               selected: selectedCategory == 'Health',
               icon: BootstrapIcons.heart_pulse,
-              onPressed: () => onSelectCategory('Health'),
+              onPressed: onSelectCategory != null
+                  ? () => onSelectCategory!('Health')
+                  : null,
             ),
             CategoryWidget(
               title: 'Books',
               selected: selectedCategory == 'Books',
               icon: BootstrapIcons.book,
-              onPressed: () => onSelectCategory('Books'),
+              onPressed: onSelectCategory != null
+                  ? () => onSelectCategory!('Books')
+                  : null,
             ),
             CategoryWidget(
               title: 'Gifts',
               selected: selectedCategory == 'Other',
               icon: BootstrapIcons.gift,
-              onPressed: () => onSelectCategory('Other'),
+              onPressed: onSelectCategory != null
+                  ? () => onSelectCategory!('Other')
+                  : null,
             ),
           ],
         ),

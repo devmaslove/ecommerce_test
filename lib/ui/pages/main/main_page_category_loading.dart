@@ -1,8 +1,6 @@
-import 'package:ecommerce_test/ui/pages/main/bloc/main_bloc.dart';
 import 'package:ecommerce_test/ui/pages/main/widgets/list_categories_widget.dart';
 import 'package:ecommerce_test/ui/resources/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainPageCategoryLoading extends StatelessWidget {
   final String selectedCategory;
@@ -21,13 +19,9 @@ class MainPageCategoryLoading extends StatelessWidget {
           children: [
             const SizedBox(height: 12),
             ListCategoriesWidget(
-              key: const Key('Categories'),
               padding: const EdgeInsets.symmetric(horizontal: 16),
               selectedCategory: selectedCategory,
-              onSelectCategory: (category) {
-                final bloc = context.read<MainBloc>();
-                bloc.add(MainSelectCategoryEvent(category));
-              },
+              onSelectCategory: null,
             ),
             const SizedBox(height: 12),
             const Expanded(

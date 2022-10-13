@@ -6,7 +6,7 @@ class CategoryWidget extends StatelessWidget {
   final String title;
   final bool selected;
   final IconData icon;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   const CategoryWidget({
     super.key,
