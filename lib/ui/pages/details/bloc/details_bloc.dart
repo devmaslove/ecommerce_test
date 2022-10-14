@@ -74,7 +74,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
   }
 
   String _formatPrice(final double price) {
-    final oCcy = NumberFormat("\$#,##0.00", "en_US");
+    final oCcy = NumberFormat("\$#,##0", "en_US");
     return oCcy.format(price);
   }
 

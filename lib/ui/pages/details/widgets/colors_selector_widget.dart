@@ -1,3 +1,4 @@
+import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/material.dart';
 
 class ColorsSelectorWidget extends StatelessWidget {
@@ -15,7 +16,7 @@ class ColorsSelectorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      spacing: 18,
+      spacing: 12,
       children: [
         for (int i = 0; i < colors.length; i++)
           _ColorWidget(
@@ -51,10 +52,13 @@ class _ColorWidget extends StatelessWidget {
           width: 40,
           height: 40,
           child: selected
-              ? const Icon(
-                  Icons.check,
-                  size: 24,
-                  color: Colors.white,
+              ? const Padding(
+                  padding: EdgeInsets.only(top: 4),
+                  child: Icon(
+                    BootstrapIcons.check2,
+                    size: 24,
+                    color: Colors.white,
+                  ),
                 )
               : null,
         ),

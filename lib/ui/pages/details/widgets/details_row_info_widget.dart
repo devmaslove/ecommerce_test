@@ -1,5 +1,5 @@
+import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:ecommerce_test/ui/pages/details/widgets/details_info_widget.dart';
-import 'package:ecommerce_test/ui/resources/app_images.dart';
 import 'package:flutter/material.dart';
 
 class DetailsRowInfoWidget extends StatelessWidget {
@@ -23,33 +23,25 @@ class DetailsRowInfoWidget extends StatelessWidget {
         Expanded(
           child: DetailsInfoWidget(
             text: cpu,
-            imageWidth: 28,
-            imageHeight: 28,
-            imageAssetName: AppImages.cpu,
+            icon: BootstrapIcons.cpu,
           ),
         ),
         Expanded(
           child: DetailsInfoWidget(
             text: camera,
-            imageWidth: 28,
-            imageHeight: 22,
-            imageAssetName: AppImages.camera,
+            icon: BootstrapIcons.camera,
           ),
         ),
         Expanded(
           child: DetailsInfoWidget(
             text: ssd,
-            imageWidth: 28,
-            imageHeight: 21,
-            imageAssetName: AppImages.ssd,
+            icon: BootstrapIcons.memory,
           ),
         ),
         Expanded(
           child: DetailsInfoWidget(
             text: sd,
-            imageWidth: 19,
-            imageHeight: 22,
-            imageAssetName: AppImages.sd,
+            icon: BootstrapIcons.sd_card,
           ),
         ),
       ],

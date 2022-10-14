@@ -19,12 +19,12 @@ class BigButtonWidget extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        primary: AppColors.accent,
+        backgroundColor: AppColors.accent,
         elevation: 0,
-        padding: const EdgeInsets.symmetric(horizontal: 38),
-        minimumSize: const Size(double.infinity, 54),
+        padding: const EdgeInsets.symmetric(horizontal: 32),
+        minimumSize: const Size(double.infinity, 56),
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
       ),
       child: Row(

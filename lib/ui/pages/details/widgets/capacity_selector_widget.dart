@@ -17,7 +17,7 @@ class CapacitySelectorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      spacing: 18,
+      spacing: 12,
       children: [
         for (int i = 0; i < capacities.length; i++)
           _CapacityWidget(
@@ -44,9 +44,9 @@ class _CapacityWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: selected ? AppColors.accent : null,
+      color: selected ? AppColors.dark : null,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(8),
       ),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -57,8 +57,8 @@ class _CapacityWidget extends StatelessWidget {
           ),
           child: Ink(
             padding: const EdgeInsets.only(
-              left: 16,
-              right: 16,
+              left: 12,
+              right: 12,
               top: 8,
               bottom: 6,
             ),
@@ -66,7 +66,8 @@ class _CapacityWidget extends StatelessWidget {
               capacity,
               textAlign: TextAlign.center,
               style: const AppTextStyle().copyWith(
-                color: selected ? Colors.white : AppColors.greyCapacity,
+                color:
+                    selected ? Colors.white : AppColors.dark.withOpacity(0.3),
                 fontSize: 15,
                 fontWeight: FontWeight.w700,
               ),

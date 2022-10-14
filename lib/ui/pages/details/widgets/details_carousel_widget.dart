@@ -1,5 +1,4 @@
 import 'package:card_swiper/card_swiper.dart';
-import 'package:ecommerce_test/ui/resources/app_colors.dart';
 import 'package:ecommerce_test/ui/resources/app_images.dart';
 import 'package:flutter/material.dart';
 
@@ -18,16 +17,9 @@ class DetailsCarouselWidget extends StatelessWidget {
         return Container(
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.shadowCarousel.withOpacity(0.16),
-                offset: const Offset(0, 10),
-                blurRadius: 20,
-              ),
-            ],
+            borderRadius: BorderRadius.circular(12),
           ),
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           clipBehavior: Clip.antiAlias,
           child: Image.network(
             imagesLinks[index],
@@ -42,7 +34,7 @@ class DetailsCarouselWidget extends StatelessWidget {
         );
       },
       itemCount: imagesLinks.length,
-      viewportFraction: 0.8,
+      viewportFraction: 0.6,
       scale: 0.9,
     );
   }
