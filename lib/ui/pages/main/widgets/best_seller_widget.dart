@@ -85,6 +85,7 @@ class BestSellerWidget extends StatelessWidget {
                       style: const AppTextStyle().copyWith(
                         fontSize: 15,
                         fontWeight: FontWeight.w700,
+                        color: AppColors.dark,
                       ),
                     ),
                     const SizedBox(width: 4),
@@ -105,6 +106,7 @@ class BestSellerWidget extends StatelessWidget {
                   style: const AppTextStyle().copyWith(
                     fontSize: 11,
                     fontWeight: FontWeight.w400,
+                    color: AppColors.dark,
                   ),
                 ),
               ],

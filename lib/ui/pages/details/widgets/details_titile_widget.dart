@@ -29,6 +29,7 @@ class DetailsTitleWidget extends StatelessWidget {
                 style: const AppTextStyle().copyWith(
                   fontSize: 24,
                   fontWeight: FontWeight.w500,
+                  color: AppColors.dark,
                 ),
               ),
               const SizedBox(height: 8),

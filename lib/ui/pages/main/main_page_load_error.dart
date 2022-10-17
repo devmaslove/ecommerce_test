@@ -1,4 +1,5 @@
 import 'package:ecommerce_test/ui/pages/main/widgets/list_categories_widget.dart';
+import 'package:ecommerce_test/ui/resources/app_colors.dart';
 import 'package:ecommerce_test/ui/resources/app_text_style.dart';
 import 'package:ecommerce_test/ui/widgets/big_button_widget.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +41,7 @@ class MainPageLoadError extends StatelessWidget {
                         'Failed to load data',
                         style: const AppTextStyle().copyWith(
                           fontSize: 20,
+                          color: AppColors.dark,
                         ),
                       ),
                       const SizedBox(height: 20),

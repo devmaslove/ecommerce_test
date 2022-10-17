@@ -26,6 +26,7 @@ class ListTitleWidget extends StatelessWidget {
           style: const AppTextStyle().copyWith(
             fontSize: 24,
             fontWeight: FontWeight.w700,
+            color: AppColors.dark,
           ),
         ),
         const Spacer(),

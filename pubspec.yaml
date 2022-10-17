@@ -10,7 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_svg: ^1.1.5
   intl: ^0.17.0
   flutter_rating_bar: ^4.0.1
   card_swiper: ^2.0.4
@@ -32,7 +31,6 @@ flutter:
   assets:
     - assets/images/
     - assets/fonts/
-    - assets/svg/
 
   fonts:
     - family: Mark Pro
@@ -49,11 +47,4 @@ flutter:
           # Extra Bold (Ultra Bold) = 800 (Heavy 900)
         - asset: assets/fonts/MarkPro-Heavy.ttf
           weight: 800
-    - family: SF Pro Display
-      fonts:
-        # normal = 400
-        - asset: assets/fonts/SFPRODISPLAYREGULAR.OTF
-          weight: 400
-        # bold = 700
-        - asset: assets/fonts/SFPRODISPLAYBOLD.OTF
-          weight: 700
+

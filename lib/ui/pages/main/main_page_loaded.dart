@@ -7,6 +7,7 @@ import 'package:ecommerce_test/ui/pages/main/widgets/list_best_sellers_widget.da
 import 'package:ecommerce_test/ui/pages/main/widgets/list_categories_widget.dart';
 import 'package:ecommerce_test/ui/pages/main/widgets/list_hot_sales_widget.dart';
 import 'package:ecommerce_test/ui/pages/main/widgets/list_title_widget.dart';
+import 'package:ecommerce_test/ui/resources/app_colors.dart';
 import 'package:ecommerce_test/ui/resources/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -107,6 +108,7 @@ class MainPageLoaded extends StatelessWidget {
                     'No items',
                     style: const AppTextStyle().copyWith(
                       fontSize: 20,
+                      color: AppColors.dark,
                     ),
                   ),
                 ),

@@ -26,7 +26,7 @@ class HotSaleWidget extends StatelessWidget {
       height: height,
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: AppColors.backgroundDark,
+        color: AppColors.backgroundDarkImages,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Stack(
@@ -67,7 +67,7 @@ class HotSaleWidget extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: onBuy,
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.white,
+                  backgroundColor: Colors.white,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(4),
@@ -80,10 +80,10 @@ class HotSaleWidget extends StatelessWidget {
                 child: Text(
                   'Buy now!',
                   style: const AppTextStyle().copyWith(
-                    fontFamily: 'SF Pro Display',
                     fontSize: 11,
                     height: 13 / 11,
                     fontWeight: FontWeight.w700,
+                    color: AppColors.dark,
                   ),
                 ),
               ),
@@ -103,7 +103,6 @@ class HotSaleWidget extends StatelessWidget {
                     child: Text(
                       title,
                       style: const AppTextStyle().copyWith(
-                        fontFamily: 'SF Pro Display',
                         fontSize: 24,
                         height: 30 / 24,
                         fontWeight: FontWeight.w700,
@@ -117,7 +116,6 @@ class HotSaleWidget extends StatelessWidget {
                     child: Text(
                       subtitle,
                       style: const AppTextStyle().copyWith(
-                        fontFamily: 'SF Pro Display',
                         fontSize: 11,
                         height: 13 / 11,
                         fontWeight: FontWeight.w400,
