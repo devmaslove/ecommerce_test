@@ -1,3 +1,4 @@
+import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:ecommerce_test/ui/pages/cart/bloc/cart_bloc.dart';
 import 'package:ecommerce_test/ui/pages/cart/widgets/cart_item_widget.dart';
 import 'package:ecommerce_test/ui/pages/cart/widgets/two_column_text_widget.dart';
@@ -16,7 +17,14 @@ class CartPage extends StatelessWidget {
       create: (_) => CartBloc()..add(const CartLoadEvent()),
       child: Scaffold(
         backgroundColor: AppColors.dark,
-        appBar: AppBar(backgroundColor: AppColors.dark),
+        appBar: AppBar(
+          backgroundColor: AppColors.dark,
+          leading: IconButton(
+            icon: const Icon(BootstrapIcons.chevron_left),
+            onPressed: () => Navigator.of(context).maybePop(),
+            tooltip: MaterialLocalizations.of(context).backButtonTooltip,
+          ),
+        ),
         body: const CartContent(),
       ),
     );
@@ -74,17 +82,18 @@ class CartContentLoaded extends StatelessWidget {
               );
             },
             separatorBuilder: (_, __) {
-              return const SizedBox(height: 44);
+              return const SizedBox(height: 24);
             },
           ),
         ),
-        Divider(
-          height: 2,
-          color: Colors.white.withOpacity(0.25),
+        const SizedBox(height: 12),
+        const Divider(
+          height: 1,
+          color: Colors.white24,
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 12),
         Padding(
-          padding: const EdgeInsets.only(left: 55, right: 35),
+          padding: const EdgeInsets.symmetric(horizontal: 32),
           child: TwoColumnTextWidget(
             leftText: 'Total',
             rightText: state.total,
@@ -92,20 +101,20 @@ class CartContentLoaded extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         Padding(
-          padding: const EdgeInsets.only(left: 55, right: 35),
+          padding: const EdgeInsets.symmetric(horizontal: 32),
           child: TwoColumnTextWidget(
             leftText: 'Delivery',
             rightText: state.delivery,
           ),
         ),
-        const SizedBox(height: 28),
-        Divider(
+        const SizedBox(height: 12),
+        const Divider(
           height: 1,
-          color: Colors.white.withOpacity(0.20),
+          color: Colors.white24,
         ),
         const SizedBox(height: 24),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 44),
+          padding: const EdgeInsets.symmetric(horizontal: 32),
           child: BigButtonWidget(
             text: 'Checkout',
             onPressed: () {
@@ -113,7 +122,7 @@ class CartContentLoaded extends StatelessWidget {
             },
           ),
         ),
-        const SizedBox(height: 44),
+        const SizedBox(height: 24),
       ],
     );
   }
@@ -156,9 +165,10 @@ class CartContentEmpty extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const SizedBox(height: 24),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(32),
+            padding: const EdgeInsets.symmetric(horizontal: 32),
             child: Text(
               'Your cart is currently no products',
               style: const AppTextStyle().copyWith(
@@ -168,14 +178,14 @@ class CartContentEmpty extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 28),
-        Divider(
+        const SizedBox(height: 24),
+        const Divider(
           height: 1,
-          color: Colors.white.withOpacity(0.20),
+          color: Colors.white24,
         ),
         const SizedBox(height: 24),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 44),
+          padding: const EdgeInsets.symmetric(horizontal: 32),
           child: BigButtonWidget(
             text: 'Start shopping',
             onPressed: () {
@@ -183,7 +193,7 @@ class CartContentEmpty extends StatelessWidget {
             },
           ),
         ),
-        const SizedBox(height: 44),
+        const SizedBox(height: 24),
       ],
     );
   }

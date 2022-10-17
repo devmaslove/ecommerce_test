@@ -49,11 +49,12 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   }
 
   String _formatTotal(final int total) {
-    final oCcy = NumberFormat("\$#,##0 us", "en_US");
+    final oCcy = NumberFormat("\$#,##0", "en_US");
     return oCcy.format(total);
   }
 
   String _formatPrice(final int price) {
-    return '\$${price.toDouble().toStringAsFixed(2)}';
+    final oCcy = NumberFormat("\$#,##0", "en_US");
+    return oCcy.format(price);
   }
 }

@@ -1,3 +1,4 @@
+import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:ecommerce_test/ui/pages/cart/models/cart_item_model.dart';
 import 'package:ecommerce_test/ui/resources/app_colors.dart';
 import 'package:ecommerce_test/ui/resources/app_images.dart';
@@ -21,25 +22,26 @@ class CartItemWidget extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(12),
           ),
+          padding: const EdgeInsets.all(8),
           clipBehavior: Clip.antiAlias,
           child: Image.network(
             item.images,
             fit: BoxFit.fitHeight,
-            width: 88,
-            height: 88,
+            width: 68,
+            height: 68,
             errorBuilder: (_, __, ___) {
               return Image.asset(
                 AppImages.mobileNotLoad,
-                width: 88,
-                height: 88,
+                width: 68,
+                height: 68,
                 fit: BoxFit.contain,
               );
             },
           ),
         ),
-        const SizedBox(width: 16),
+        const SizedBox(width: 12),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,10 +73,11 @@ class CartItemWidget extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(width: 16),
+        const SizedBox(width: 12),
         IconButton(
           color: Colors.white,
-          icon: const Icon(Icons.delete_outline),
+          icon: const Icon(BootstrapIcons.trash3_fill),
+          iconSize: 20,
           onPressed: onDelete,
         )
       ],
